@@ -40,6 +40,7 @@ dependencies:
   flutter_riverpod: ^2.6.1
   riverpod_annotation: ^2.6.1
   flutter_svg: ^2.2.1
+  syncfusion_flutter_charts: ^31.1.23
 
 dev_dependencies:
   flutter_test:

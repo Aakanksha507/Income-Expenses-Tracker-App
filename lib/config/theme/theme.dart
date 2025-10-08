@@ -5,7 +5,8 @@ class AppTheme {
     return ThemeData(
       brightness: Brightness.light,
       scaffoldBackgroundColor: Colors.white,
-      primaryColor: Color(0xff3F8782),
+      primaryColor: Color(0xff429690),
+      cardColor: Color(0xff1B5C58),
       textTheme: TextTheme(
         displayMedium: TextStyle(color: Colors.white),
         displaySmall: TextStyle(color: Colors.black),
@@ -15,6 +16,8 @@ class AppTheme {
         buttonColor: Color(0xff3F8782),
         splashColor: Color(0xff69AEA9),
       ),
+      iconTheme: IconThemeData(color: Colors.white),
+      navigationBarTheme: NavigationBarThemeData(backgroundColor: Colors.white),
     );
   }
 

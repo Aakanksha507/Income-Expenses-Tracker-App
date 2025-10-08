@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:incomeexpensestracker/config/route/path.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/button_widget.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/text_widget.dart';
 
@@ -64,6 +66,9 @@ class Onboarding extends StatelessWidget {
                 textStyle: TextStyle(
                   color: theme.textTheme.displayMedium!.color!,
                 ),
+                onPressed: () {
+                  context.go(Path.homepage);
+                },
               ),
               Padding(
                 padding: EdgeInsetsGeometry.symmetric(

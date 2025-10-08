@@ -1,20 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:incomeexpensestracker/features/auth/presentation/pages/splash/splash_page.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:incomeexpensestracker/config/route/route.dart';
+import 'package:incomeexpensestracker/config/theme/theme.dart';
+import 'package:incomeexpensestracker/config/theme/theme_provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ScreenUtilInit(
+      designSize: Size(414, 896),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      ensureScreenSize: true,
+      builder: (context, child) => const ProviderScope(child: MyApp()),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const SplashPage(),
+    return Consumer(
+      builder: (context, ref, _) {
+        final themeMode = ref.watch(themeModeProvider);
+        return MaterialApp.router(
+          theme: AppTheme.lightTheme(),
+          darkTheme: AppTheme.darkTheme(),
+          themeMode: themeMode,
+          debugShowCheckedModeBanner: false,
+          routerConfig: router,
+        );
+      },
     );
   }
 }

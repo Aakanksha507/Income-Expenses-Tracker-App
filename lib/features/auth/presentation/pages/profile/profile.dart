@@ -111,23 +111,23 @@ class Profile extends StatelessWidget {
                 ),
                 Divider(color: Colors.grey),
                 _ProfileTile(
-                  img: 'assets/images/diamond.svg',
+                  img: 'assets/images/person.svg',
                   label: 'Account info',
                 ),
                 _ProfileTile(
-                  img: 'assets/images/diamond.svg',
+                  img: 'assets/images/pp.svg',
                   label: 'Personal profile',
                 ),
                 _ProfileTile(
-                  img: 'assets/images/diamond.svg',
+                  img: 'assets/images/msil.svg',
                   label: 'Message center',
                 ),
                 _ProfileTile(
-                  img: 'assets/images/diamond.svg',
+                  img: 'assets/images/shield.svg',
                   label: 'Login and security',
                 ),
                 _ProfileTile(
-                  img: 'assets/images/diamond.svg',
+                  img: 'assets/images/lock.svg',
                   label: 'Data and privacy',
                 ),
               ],

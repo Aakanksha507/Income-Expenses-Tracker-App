@@ -45,7 +45,7 @@ class _CustomNavigationBarState extends ConsumerState<CustomNavigationBar> {
               case 1:
                 context.go(Path.statistics);
               case 2:
-                context.go(Path.homepage);
+                context.go(Path.wallet);
               case 3:
                 context.go(Path.profile);
             }

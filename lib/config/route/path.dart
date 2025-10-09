@@ -5,4 +5,5 @@ class Path {
   static const addexpense = '/addexpenses';
   static const statistics = '/statistics';
   static const profile = '/profile';
+  static const wallet = '/wallet';
 }

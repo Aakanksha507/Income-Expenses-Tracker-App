@@ -8,6 +8,7 @@ class AppTheme {
       primaryColor: Color(0xff429690),
       cardColor: Color(0xff1B5C58),
       textTheme: TextTheme(
+        titleSmall: TextStyle(color: Colors.grey),
         displayMedium: TextStyle(color: Colors.white),
         displaySmall: TextStyle(color: Colors.black),
         bodyLarge: TextStyle(color: Color(0xff3F8782)),
@@ -16,6 +17,11 @@ class AppTheme {
         buttonColor: Color(0xff3F8782),
         splashColor: Color(0xff69AEA9),
       ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: Color(0xff3F8782),
+        splashColor: Color(0xff69AEA9),
+      ),
+      cardTheme: CardThemeData(color: Colors.white),
       iconTheme: IconThemeData(color: Colors.white),
       navigationBarTheme: NavigationBarThemeData(backgroundColor: Colors.white),
     );

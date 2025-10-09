@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:incomeexpensestracker/config/route/path.dart';
+import 'package:incomeexpensestracker/features/auth/presentation/provider/navigation_provider.dart';
 
-class CustomNavigationBar extends StatefulWidget {
+class CustomNavigationBar extends ConsumerStatefulWidget {
   const CustomNavigationBar({super.key});
 
   @override
-  State<CustomNavigationBar> createState() => _CustomNavigationBarState();
+  ConsumerState<CustomNavigationBar> createState() =>
+      _CustomNavigationBarState();
 }
 
-class _CustomNavigationBarState extends State<CustomNavigationBar> {
-  int _selectedIndex = 0;
-
+class _CustomNavigationBarState extends ConsumerState<CustomNavigationBar> {
   @override
   Widget build(BuildContext context) {
+    final selectedIndex = ref.read(navigationIndexProvider);
     final theme = Theme.of(context);
 
     return Container(
@@ -32,11 +36,19 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
         child: NavigationBar(
           backgroundColor: Colors.white,
           height: 92.h,
-          selectedIndex: _selectedIndex,
+          selectedIndex: selectedIndex,
           onDestinationSelected: (int index) {
-            setState(() {
-              _selectedIndex = index;
-            });
+            ref.read(navigationIndexProvider.notifier).state = index;
+            switch (index) {
+              case 0:
+                context.go(Path.homepage);
+              case 1:
+                context.go(Path.statistics);
+              case 2:
+                context.go(Path.homepage);
+              case 3:
+                context.go(Path.profile);
+            }
           },
           indicatorColor: Colors.transparent,
           labelTextStyle: WidgetStateTextStyle.resolveWith((states) {

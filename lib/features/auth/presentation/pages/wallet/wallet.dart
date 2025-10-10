@@ -106,7 +106,9 @@ class Wallet extends StatelessWidget {
                       Icons.qr_code,
                       theme,
                       text: 'Pay',
-                      ontap: () {},
+                      ontap: () {
+                        context.go(Path.connect);
+                      },
                     ),
                     SizedBox(width: 30.w),
                     _buildCircleIcon(

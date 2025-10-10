@@ -65,6 +65,8 @@ class Onboarding extends StatelessWidget {
                 buttonName: 'Get Started',
                 textStyle: TextStyle(
                   color: theme.textTheme.displayMedium!.color!,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
                 ),
                 onPressed: () {
                   context.go(Path.homepage);

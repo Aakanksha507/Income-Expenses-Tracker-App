@@ -6,6 +6,7 @@ import 'package:incomeexpensestracker/features/auth/presentation/pages/onboardin
 import 'package:incomeexpensestracker/features/auth/presentation/pages/profile/profile.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/pages/splash/splash_page.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/pages/statistics/statistics.dart';
+import 'package:incomeexpensestracker/features/auth/presentation/pages/wallet/connect_wallet.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/pages/wallet/wallet.dart';
 
 final GoRouter router = GoRouter(
@@ -27,5 +28,9 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(path: Path.profile, builder: (context, state) => const Profile()),
     GoRoute(path: Path.wallet, builder: (context, state) => const Wallet()),
+    GoRoute(
+      path: Path.connect,
+      builder: (context, state) => const ConnectWallet(),
+    ),
   ],
 );

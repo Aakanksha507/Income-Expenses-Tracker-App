@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:incomeexpensestracker/config/route/path.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/appbarheader.dart';
@@ -63,6 +64,7 @@ class Homepage extends StatelessWidget {
               ),
             ),
           ),
+          SvgPicture.asset('assets/images/top_bg.svg'),
           Padding(
             padding: EdgeInsetsGeometry.only(top: 105),
             child: CreditcardWidget(),

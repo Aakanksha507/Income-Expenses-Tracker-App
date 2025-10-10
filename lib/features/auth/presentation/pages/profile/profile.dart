@@ -59,6 +59,7 @@ class Profile extends StatelessWidget {
                           ),
                         ],
                       ),
+
                       // Positioned(
                       //   top: -185,
                       //   left: 147,
@@ -77,6 +78,7 @@ class Profile extends StatelessWidget {
                       // ),
                     ],
                   ),
+                  SvgPicture.asset('assets/images/top_bg.svg'),
                 ],
               ),
             ),

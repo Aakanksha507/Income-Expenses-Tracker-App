@@ -1,0 +1,67 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:incomeexpensestracker/config/route/path.dart';
+import 'package:incomeexpensestracker/features/auth/presentation/widget/custom_navigation_bar.dart';
+import 'package:incomeexpensestracker/features/auth/presentation/widget/screen_layout.dart';
+import 'package:incomeexpensestracker/features/auth/presentation/widget/text_widget.dart';
+
+class BillDetails extends StatelessWidget {
+  const BillDetails({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Scaffold(
+      body: ScreenLayout(
+        dynamicWidget: Padding(
+          padding: const EdgeInsets.only(left: 24.0, right: 24.0, top: 66),
+          child: Stack(
+            children: [
+              Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          context.go(Path.homepage);
+                        },
+                        child: const Icon(Icons.arrow_back_ios, size: 20),
+                      ),
+                      TextWidget(
+                        text: 'Bill Details',
+                        style: TextStyle(
+                          color: theme.textTheme.displayMedium!.color,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18,
+                        ),
+                      ),
+                      Material(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.circular(5.sp),
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          borderRadius: BorderRadius.circular(5.sp),
+                          onTap: () {},
+                          child: Icon(
+                            Icons.notifications_none_outlined,
+                            color: theme.iconTheme.color,
+                            size: 23,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        
+      ),
+      bottomNavigationBar: const CustomNavigationBar(),
+    );
+  }
+}

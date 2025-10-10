@@ -12,7 +12,13 @@ class AppBarHeader extends StatelessWidget {
       height: 257.h,
       width: 414.w,
       decoration: BoxDecoration(
-        color: theme.primaryColor,
+        // image: DecorationImage(image: SvgAssetLoader('assets/images/top_bg.svg')),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Color(0xff429690), Color(0xff2A7C76)],
+        ),
+        // color: theme.primaryColor,
         borderRadius: BorderRadius.only(
           bottomRight: Radius.elliptical(270, 47),
           bottomLeft: Radius.elliptical(270, 47),

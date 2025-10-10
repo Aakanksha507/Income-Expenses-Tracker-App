@@ -6,7 +6,7 @@ class AppTheme {
       brightness: Brightness.light,
       scaffoldBackgroundColor: Colors.white,
       primaryColor: Color(0xff2A7C76),
-      cardColor: Color(0xff1B5C58),
+      cardColor: Color(0xff2F7E79),
       textTheme: TextTheme(
         titleSmall: TextStyle(color: Colors.grey),
         titleMedium: TextStyle(color: Colors.grey[700]),

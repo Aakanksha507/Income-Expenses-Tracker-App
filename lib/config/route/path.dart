@@ -7,4 +7,6 @@ class Path {
   static const profile = '/profile';
   static const wallet = '/wallet';
   static const connect = '/connect';
+    static const billdetails = '/billdetails';
+  static const billpayment = '/billpayment';
 }

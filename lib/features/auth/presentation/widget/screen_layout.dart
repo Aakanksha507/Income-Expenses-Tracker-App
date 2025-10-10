@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 class ScreenLayout extends StatelessWidget {
   final Widget? dynamicWidget;
@@ -17,6 +18,7 @@ class ScreenLayout extends StatelessWidget {
           decoration: BoxDecoration(color: theme.primaryColor),
           child: dynamicWidget,
         ),
+        SvgPicture.asset('assets/images/top_bg.svg'),
         Padding(
           padding: const EdgeInsets.only(top: 165.0),
           child: Container(

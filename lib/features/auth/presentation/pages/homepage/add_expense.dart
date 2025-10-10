@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:incomeexpensestracker/config/route/path.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/appbarheader.dart';
@@ -23,12 +24,12 @@ class AddExpense extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       print('Tapped');
                       context.go(Path.homepage);
                     },
-                    child: const Icon(Icons.arrow_back_ios, size: 20),
+                    child: Icon(Icons.arrow_back_ios, size: 20),
                   ),
 
                   TextWidget(
@@ -48,6 +49,7 @@ class AddExpense extends StatelessWidget {
               ),
             ),
           ),
+          SvgPicture.asset('assets/images/top_bg.svg'),
           SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.only(top: 155.h, left: 28.w),

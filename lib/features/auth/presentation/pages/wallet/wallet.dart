@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -13,136 +12,199 @@ class Wallet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Scaffold(
-      body: ScreenLayout(
-        dynamicWidget: Padding(
-          padding: const EdgeInsets.only(left: 24.0, right: 24.0, top: 66),
-          child: Stack(
-            children: [
-              Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          context.go(Path.homepage);
-                        },
-                        child: const Icon(Icons.arrow_back_ios, size: 20),
-                      ),
-                      TextWidget(
-                        text: 'Wallet',
-                        style: TextStyle(
-                          color: theme.textTheme.displayMedium!.color,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 18,
+
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        body: ScreenLayout(
+          dynamicWidget: Padding(
+            padding: const EdgeInsets.only(left: 24.0, right: 24.0, top: 66),
+            child: Stack(
+              children: [
+                Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            context.go(Path.homepage);
+                          },
+                          child: const Icon(Icons.arrow_back_ios, size: 20),
                         ),
-                      ),
-                      Material(
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(5.sp),
-                        child: InkWell(
-                          splashColor: Colors.transparent,
-                          borderRadius: BorderRadius.circular(5.sp),
-                          onTap: () {},
-                          child: Icon(
-                            Icons.notifications_none_outlined,
-                            color: theme.iconTheme.color,
-                            size: 23,
+                        TextWidget(
+                          text: 'Wallet',
+                          style: TextStyle(
+                            color: theme.textTheme.displayMedium!.color,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
                           ),
                         ),
+                        Material(
+                          color: Colors.transparent,
+                          borderRadius: BorderRadius.circular(5.sp),
+                          child: InkWell(
+                            splashColor: Colors.transparent,
+                            borderRadius: BorderRadius.circular(5.sp),
+                            onTap: () {},
+                            child: Icon(
+                              Icons.notifications_none_outlined,
+                              color: theme.iconTheme.color,
+                              size: 23,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          dynamicWidget2: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 50),
+              Center(
+                child: Column(
+                  children: [
+                    TextWidget(
+                      text: 'Total Balance',
+                      style: TextStyle(
+                        color: theme.textTheme.titleSmall!.color,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
                       ),
+                    ),
+                    SizedBox(height: 10.h),
+                    TextWidget(
+                      text: '\$1234.0',
+                      style: TextStyle(
+                        color: theme.textTheme.displaySmall!.color,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.only(top: 30.0, left: 80),
+                child: Row(
+                  children: [
+                    _buildCircleIcon(
+                      Icons.add,
+                      theme,
+                      text: 'Add',
+                      ontap: () {},
+                    ),
+
+                    SizedBox(width: 30.w),
+                    _buildCircleIcon(
+                      Icons.qr_code,
+                      theme,
+                      text: 'Pay',
+                      ontap: () {},
+                    ),
+                    SizedBox(width: 30.w),
+                    _buildCircleIcon(
+                      Icons.send,
+                      theme,
+                      rotationAngle: 320 * 3.1415926535 / 180,
+                      text: 'Send',
+                      ontap: () {},
+                    ),
+                  ],
+                ),
+              ),
+
+              SizedBox(height: 40.h),
+
+              /// TabBar
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Container(
+                  height: 48,
+                  width: 374,
+                  decoration: BoxDecoration(
+                    color: Color(0xffF4F6F6),
+                    borderRadius: BorderRadius.circular(30.r),
+                  ),
+                  child: TabBar(
+                    dividerColor: Colors.transparent,
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    labelColor: theme.textTheme.titleMedium!.color,
+                    unselectedLabelColor: theme.textTheme.titleMedium!.color,
+                    labelStyle: const TextStyle(fontWeight: FontWeight.w600),
+                    padding: EdgeInsets.all(4),
+                    indicator: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: Colors.white,
+                    ),
+                    tabs: [
+                      Tab(text: 'Transactions'),
+                      Tab(text: 'Upcoming Bills'),
                     ],
                   ),
-                ],
+                ),
+              ),
+
+              SizedBox(
+                height: 100.h,
+                child: TabBarView(
+                  children: [
+                    Center(child: Text('Transactions Content')),
+                    Center(child: Text('Upcoming Bills Content')),
+                  ],
+                ),
               ),
             ],
           ),
         ),
-        dynamicWidget2: Column(
-          children: [
-            SizedBox(height: 50),
-            TextWidget(
-              text: 'Total Balance',
-              style: TextStyle(
-                color: theme.textTheme.titleSmall!.color,
-                fontWeight: FontWeight.w500,
-                fontSize: 16,
-              ),
-            ),
-            SizedBox(height: 10.h),
-            TextWidget(
-              text: '\$1234.0',
-              style: TextStyle(
-                color: theme.textTheme.displaySmall!.color,
-                fontWeight: FontWeight.bold,
-                fontSize: 30,
-              ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.only(top: 40.0, left: 80),
-              child: Row(
-                children: [
-                  Container(
-                    height: 60,
-                    width: 60,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: theme.primaryColor),
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    child: Icon(Icons.add, color: theme.primaryColor),
-                  ),
-                  SizedBox(width: 30.w),
-                  Container(
-                    height: 60,
-                    width: 60,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: theme.primaryColor),
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    child: Icon(Icons.qr_code, color: theme.primaryColor),
-                  ),
-                  SizedBox(width: 30.w),
-                  Container(
-                    height: 60,
-                    width: 60,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: theme.primaryColor),
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    child: Icon(Icons.send, color: theme.primaryColor),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 50.w),
-            CupertinoSlidingSegmentedControl<int>(
-              padding: EdgeInsetsGeometry.symmetric(
-                vertical: 10,
-                horizontal: 50,
-              ),
-              children: const <int, Widget>{
-                0: Text('Transactions'),
-                1: Text('Upcoming Bills'),
-              },
-              // groupValue: _slidingValue,
-              onValueChanged: (int? newValue) {
-                if (newValue != null) {
-                  // setState(() {
-                  //   _slidingValue = newValue;
-                  // });
-                }
-              },
-            ),
-          ],
-        ),
+        bottomNavigationBar: CustomNavigationBar(),
       ),
-      bottomNavigationBar: CustomNavigationBar(),
+    );
+  }
+
+  Widget _buildCircleIcon(
+    IconData icon,
+    ThemeData theme, {
+    double rotationAngle = 0,
+    String text = '',
+    void Function()? ontap,
+  }) {
+    return Column(
+      children: [
+        Container(
+          height: 60,
+          width: 60,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border.all(color: theme.primaryColor),
+            borderRadius: BorderRadius.circular(50),
+          ),
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(50),
+              splashColor: Colors.grey[200],
+              onTap: ontap,
+              child: Center(
+                child: Transform.rotate(
+                  angle: rotationAngle,
+                  child: Icon(icon, color: theme.primaryColor),
+                ),
+              ),
+            ),
+          ),
+        ),
+        TextWidget(
+          text: text,
+          style: TextStyle(color: theme.textTheme.displaySmall!.color),
+        ),
+      ],
     );
   }
 }

@@ -9,6 +9,7 @@ class AppTheme {
       cardColor: Color(0xff1B5C58),
       textTheme: TextTheme(
         titleSmall: TextStyle(color: Colors.grey),
+        titleMedium: TextStyle(color: Colors.grey[700]),
         displayMedium: TextStyle(color: Colors.white),
         displaySmall: TextStyle(color: Colors.black),
         bodyLarge: TextStyle(color: Color(0xff3F8782)),

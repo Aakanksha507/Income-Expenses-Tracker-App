@@ -11,6 +11,7 @@ class CustomButtonWidget extends StatelessWidget {
   final String? buttonIcon;
   final Widget? child;
   final TextStyle? textStyle;
+  final double? height;
 
   const CustomButtonWidget({
     super.key,
@@ -21,6 +22,7 @@ class CustomButtonWidget extends StatelessWidget {
     this.buttonIcon,
     this.child,
     this.textStyle,
+    this.height,
   });
 
   @override
@@ -34,7 +36,7 @@ class CustomButtonWidget extends StatelessWidget {
 
         borderRadius: BorderRadius.circular(40.r),
         child: Container(
-          height: 67.h,
+          height: height ?? 67.h,
           width: 353.w,
           alignment: Alignment.center,
           child: child != null

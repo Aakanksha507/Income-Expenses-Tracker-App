@@ -117,7 +117,7 @@ class Wallet extends StatelessWidget {
                       rotationAngle: 320 * 3.1415926535 / 180,
                       text: 'Send',
                       ontap: () {
-                        context.go(Path.billpayment);
+                        context.go(Path.billdetails);
                       },
                     ),
                   ],

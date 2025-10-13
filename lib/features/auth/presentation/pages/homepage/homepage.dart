@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive/hive.dart';
 import 'package:incomeexpensestracker/config/route/path.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/appbarheader.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/creditcard_widget.dart';
@@ -21,8 +22,24 @@ import 'package:incomeexpensestracker/features/auth/presentation/widget/text_wid
 //   ChartData('May', 40),
 // ];
 
-class Homepage extends StatelessWidget {
+class Homepage extends StatefulWidget {
   const Homepage({super.key});
+
+  @override
+  State<Homepage> createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+  String userName = '';
+
+  @override
+  void initState() {
+    super.initState();
+    var box = Hive.box('userBox');
+    setState(() {
+      userName = box.get('name', defaultValue: 'User');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +67,7 @@ class Homepage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TextWidget(
-                        text: 'Emile Morgeana',
+                        text: userName,
                         style: TextStyle(
                           color: theme.textTheme.displayMedium!.color,
                           fontWeight: FontWeight.w600,

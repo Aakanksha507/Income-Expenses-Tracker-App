@@ -1,86 +1,162 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/text_widget.dart';
 
-class TextFormWidget extends StatelessWidget {
-  final TextEditingController? controller;
-  final String? hintText;
+class TextFormWidget extends StatefulWidget {
   final String? labelText;
-  // final bool? obscureText;
+  final String? hintText;
   final TextInputType? keyboardType;
-  final String? Function(String?)? validator;
-  final Widget? suffixIcon;
-  final List<TextInputFormatter>? inputFormatters;
-  final void Function(String)? onChanged;
+  final TextEditingController? controller;
+  final ValueChanged<String>? onChanged;
   final VoidCallback? onTap;
+  final String? Function(String?)? validator;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
+  final bool autoFocus;
+
   const TextFormWidget({
     super.key,
-    this.controller,
-    this.hintText,
     this.labelText,
-    // this.obscureText,
+    this.hintText,
     this.keyboardType,
+    this.controller,
+    this.onChanged,
+    this.onTap,
     this.validator,
+    this.prefixIcon,
     this.suffixIcon,
-    this.inputFormatters,
-    this.onChanged, this.onTap,
+    this.autoFocus = false,
   });
+
+  @override
+  State<TextFormWidget> createState() => _TextFormWidgetState();
+}
+
+class _TextFormWidgetState extends State<TextFormWidget> {
+  late TextEditingController _controller;
+  final FocusNode _focusNode = FocusNode();
+  bool _hasText = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = widget.controller ?? TextEditingController();
+    _hasText = _controller.text.isNotEmpty;
+
+    _controller.addListener(_onTextChanged);
+    _focusNode.addListener(_onFocusChanged);
+  }
+
+  void _onTextChanged() {
+    setState(() {
+      _hasText = _controller.text.isNotEmpty;
+    });
+    widget.onChanged?.call(_controller.text);
+  }
+
+  void _onFocusChanged() {
+    setState(() {});
+  }
+
+  void _clearText() {
+    _controller.clear();
+    setState(() {
+      _hasText = false;
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.removeListener(_onTextChanged);
+    _focusNode.dispose();
+    if (widget.controller == null) {
+      _controller.dispose();
+    }
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (labelText != null && labelText!.isNotEmpty) ...[
+        if (widget.labelText != null && widget.labelText!.isNotEmpty) ...[
           TextWidget(
-            text: labelText!,
+            text: widget.labelText!,
             style: TextStyle(
-              color: theme.textTheme.titleSmall!.color,
+              color: theme.textTheme.titleSmall?.color,
               fontWeight: FontWeight.w600,
               fontSize: 12,
             ),
           ),
           SizedBox(height: 8.h),
-        ] else ...[
-          SizedBox(height: 2.h),
         ],
 
         TextFormField(
-          inputFormatters: inputFormatters,
-          controller: controller,
-          keyboardType: keyboardType,
-          validator: validator,
-          onChanged: onChanged,
-  onTap: onTap, 
+          controller: _controller,
+          focusNode: _focusNode,
+          autofocus: widget.autoFocus,
+          keyboardType: widget.keyboardType ?? TextInputType.text,
+          onChanged: widget.onChanged,
+          onTap: widget.onTap,
+          validator: widget.validator,
+          style: TextStyle(
+            color: theme.textTheme.titleSmall?.color,
+            fontWeight: FontWeight.w500,
+            fontSize: 14.sp,
+          ),
           decoration: InputDecoration(
-            hintText: hintText,
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 12,
-            ),
-            suffixIcon: suffixIcon,
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: theme.primaryColor, width: 1.5),
+            contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: Color(0xFFCACACA)),
             ),
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey, width: 1),
               borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: Colors.grey),
             ),
-            border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey, width: 1),
+            focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: theme.primaryColor, width: 1.5),
             ),
             errorBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.red, width: 1),
               borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: Colors.red),
             ),
             focusedErrorBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.red, width: 1.5),
               borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: Colors.red, width: 1.5),
             ),
+            hintText: widget.hintText,
+            hintStyle: TextStyle(
+              color: Color(0xFFCACACA),
+              fontWeight: FontWeight.w500,
+              fontSize: 14.sp,
+            ),
+            prefixIcon: widget.prefixIcon,
+            suffixIcon: _hasText && _focusNode.hasFocus
+                ? InkWell(
+                    onTap: _clearText,
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 12),
+                      child: TextWidget(
+                        text: 'clear',
+
+                        style: TextStyle(
+                          color: theme.primaryColor,
+                          fontSize: 14,
+                          fontWeight: FontWeight.normal,
+                        ),
+                        //   icon: Icon(Icons.clear, size: 20),
+                        //   onPressed: _clearText,
+                        //   padding: EdgeInsets.zero,
+                        //   constraints: BoxConstraints(),
+                      ),
+                    ),
+                  )
+                : widget.suffixIcon,
           ),
         ),
       ],

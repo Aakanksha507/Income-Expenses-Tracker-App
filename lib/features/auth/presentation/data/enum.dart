@@ -1,0 +1,97 @@
+import 'package:flutter/widgets.dart';
+
+enum ExpensesCategory { upWork, paypal, youtube, netflix, starbucks, spotify }
+
+extension ExpensesCategoryExtension on ExpensesCategory {
+  String label(BuildContext context) {
+    switch (this) {
+      case ExpensesCategory.upWork:
+        return "UpWork";
+      case ExpensesCategory.paypal:
+        return "Pay Pal";
+      case ExpensesCategory.youtube:
+        return "Youtube";
+      case ExpensesCategory.netflix:
+        return "Netflix";
+      case ExpensesCategory.starbucks:
+        return "Starbucks";
+      case ExpensesCategory.spotify:
+        return "Spotify";
+    }
+  }
+
+  String getAssets(BuildContext context) {
+    switch (this) {
+      case ExpensesCategory.upWork:
+        return "assets/images/upWork.png";
+      case ExpensesCategory.paypal:
+        return "assets/images/paypal.png";
+      case ExpensesCategory.youtube:
+        return "assets/images/youtube.png";
+      case ExpensesCategory.netflix:
+        return "assets/images/netflix.png";
+      case ExpensesCategory.starbucks:
+        return "assets/images/starbuck.png";
+      case ExpensesCategory.spotify:
+        return "assets/images/spotify.png";
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// //   String get amountSign {
+// //   return this == ExpensesCategory.salaries ? '+' : '-';
+// // }
+
+// Color? get amountColor {
+//   return this == ExpensesCategory.salaries
+//       ? AppColor.primary1 
+//       :  AppColor.semantic1; 
+// }
+
+
+// static ExpensesCategory fromString(String value) {
+//   return ExpensesCategory.values.firstWhere(
+//     (e) => e.name.toLowerCase() == value.toLowerCase(),
+//     orElse: () {
+//       debugPrint('Unknown category: $value. Defaulting to transportation.');
+//       return ExpensesCategory.transportation; 
+//     },
+//   );
+// }
+
+  
+// }

@@ -13,12 +13,14 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await Hive.initFlutter(); // here hive is initialize
-  
+
   Hive.registerAdapter(ExpenseAdapter());
   await Hive.openBox<Expense>('expensesBox');
 
   await Hive.openBox<User>('userBox');
-  await Hive.openBox<Expense>('expensesBox'); // this open the box to write and read data .
+  await Hive.openBox<Expense>(
+    'expensesBox',
+  ); // this open the box to write and read data .
 
   runApp(
     ScreenUtilInit(
@@ -30,7 +32,6 @@ void main() async {
     ),
   );
 }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

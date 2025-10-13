@@ -68,7 +68,15 @@ class _AddExpenseState extends ConsumerState<AddExpense> {
   }
 
   void _submitExpense() {
-    final currentUser = Hive.box<User>('userBox').get('currentUser');
+    final currentUser = FirebaseAuth.instance.currentUser;
+
+    if (currentUser == null) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('User not logged in')));
+      return;
+    }
+
     final selectedCategory = ref.read(selectedCategoryProvider);
     final amount = amountController.text;
     final date = dateController.text;
@@ -81,7 +89,7 @@ class _AddExpenseState extends ConsumerState<AddExpense> {
     }
 
     final newExpense = Expense(
-      userId: currentUser!.uid,
+      userId: currentUser.uid,
       category: selectedCategory.label(context),
       amount: amount,
       date: date,

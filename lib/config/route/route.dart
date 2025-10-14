@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:incomeexpensestracker/config/route/path.dart';
+import 'package:incomeexpensestracker/core/checking_login_status.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/pages/homepage/add_expense.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/pages/homepage/homepage.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/pages/onboarding/onboarding.dart';
@@ -12,8 +13,12 @@ import 'package:incomeexpensestracker/features/auth/presentation/pages/wallet/co
 import 'package:incomeexpensestracker/features/auth/presentation/pages/wallet/wallet.dart';
 
 final GoRouter router = GoRouter(
-  initialLocation: Path.splash,
+  initialLocation: Path.loginStatus,
   routes: [
+     GoRoute(
+      path: Path.loginStatus,
+      builder: (context, state) => CheckingLoginStatus(),
+    ),
     GoRoute(path: Path.splash, builder: (context, state) => const SplashPage()),
     GoRoute(
       path: Path.onBoarding,

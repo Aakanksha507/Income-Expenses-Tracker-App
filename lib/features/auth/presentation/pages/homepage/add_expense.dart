@@ -136,6 +136,7 @@ class _AddExpenseState extends ConsumerState<AddExpense> {
       resizeToAvoidBottomInset: true,
       body: Stack(
         children: [
+          SvgPicture.asset('assets/images/top_bg.svg'),
           AppBarHeader(
             dynamicWidget: Padding(
               padding: const EdgeInsets.only(left: 24.0, right: 24.0, top: 66),

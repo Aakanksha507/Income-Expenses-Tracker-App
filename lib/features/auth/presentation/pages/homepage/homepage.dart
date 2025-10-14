@@ -129,34 +129,50 @@ class _HomepageState extends ConsumerState<Homepage> {
                     itemCount: allExpenses.length,
                     itemBuilder: (context, index) {
                       final expense = allExpenses[index];
-                      return ListTile(
-                        leading: expense.categoryImage != null
-                            ? Image.asset(
-                                expense.categoryImage!,
-                                width: 24,
-                                height: 24,
-                              )
-                            : Icon(Icons.image_not_supported),
-
-                        title: TextWidget(
-                          text: expense.category,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
+                      return Dismissible(
+                        key: Key(expense.key.toString()),
+                        direction: DismissDirection.endToStart,
+                        background: Container(
+                          color: Colors.red,
+                          alignment: Alignment.centerRight,
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Icon(Icons.delete, color: Colors.white),
                         ),
-                        subtitle: TextWidget(
-                          text: expense.date,
-                          style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w300,
+                        onDismissed: (direction) {
+                          expense.delete();
+                          setState(() {});
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Expense deleted')),
+                          );
+                        },
+                        child: ListTile(
+                          leading: expense.categoryImage != null
+                              ? Image.asset(
+                                  expense.categoryImage!,
+                                  width: 24,
+                                  height: 24,
+                                )
+                              : Icon(Icons.image_not_supported),
+                          title: TextWidget(
+                            text: expense.category,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
-                        ),
-                        trailing: Text(
-                          '\$${expense.amount}',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w300,
+                          subtitle: TextWidget(
+                            text: expense.date,
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w300,
+                            ),
+                          ),
+                          trailing: Text(
+                            '\$${expense.amount}',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w300,
+                            ),
                           ),
                         ),
                       );

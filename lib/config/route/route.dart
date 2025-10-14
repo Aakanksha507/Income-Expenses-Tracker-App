@@ -9,16 +9,17 @@ import 'package:incomeexpensestracker/features/auth/presentation/pages/splash/sp
 import 'package:incomeexpensestracker/features/auth/presentation/pages/statistics/statistics.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/pages/wallet/bills/bill_details.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/pages/wallet/bills/bill_payment.dart';
-import 'package:incomeexpensestracker/features/auth/presentation/pages/wallet/connect_wallet.dart';
-import 'package:incomeexpensestracker/features/auth/presentation/pages/wallet/wallet.dart';
+import 'package:incomeexpensestracker/features/auth/presentation/pages/wallet/connect_wallet/connect_wallet.dart';
+import 'package:incomeexpensestracker/features/auth/presentation/pages/wallet/wallet/wallet.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: Path.loginStatus,
   routes: [
-     GoRoute(
+    GoRoute(
       path: Path.loginStatus,
       builder: (context, state) => CheckingLoginStatus(),
     ),
+    // GoRoute(path:Path. , builder: (context, state)=>popB),
     GoRoute(path: Path.splash, builder: (context, state) => const SplashPage()),
     GoRoute(
       path: Path.onBoarding,

@@ -6,6 +6,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:incomeexpensestracker/config/route/route.dart';
 import 'package:incomeexpensestracker/config/theme/theme.dart';
 import 'package:incomeexpensestracker/config/theme/theme_provider.dart';
+import 'package:incomeexpensestracker/features/auth/presentation/data/model/debitcard.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/data/model/expenses.dart';
 
 void main() async {
@@ -13,13 +14,19 @@ void main() async {
   await Firebase.initializeApp();
   await Hive.initFlutter(); // here hive is initialize
 
-  Hive.registerAdapter(ExpenseAdapter());
+  //Register Adapter
+  Hive.registerAdapter(
+    ExpenseAdapter(),
+  ); // it is bridge that allow hive to understand custom data ..for storing and retrieving data
+  Hive.registerAdapter(DebitCardAdapter());
 
+  //Open Box
   await Hive.openBox('userBox');
   await Hive.openBox<Expense>(
+    // this open the box to write and read data .
     'expensesBox',
-  ); // this open the box to write and read data .
-
+  );
+  await Hive.openBox<DebitCard>('debitcardBox');
   runApp(
     ScreenUtilInit(
       designSize: Size(414, 896),

@@ -21,6 +21,7 @@ class _CustomNavigationBarState extends ConsumerState<CustomNavigationBar> {
     final theme = Theme.of(context);
 
     return Container(
+      padding: EdgeInsets.only(top: 0),
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(

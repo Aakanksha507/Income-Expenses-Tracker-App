@@ -11,13 +11,14 @@ class TransactionContent extends ConsumerWidget {
     final expensesBox = ref.watch(expensesBoxProvider);
     final allExpenses = expensesBox.values.toList();
     return ListView.builder(
+      shrinkWrap: true,
       padding: EdgeInsets.zero,
       itemCount: allExpenses.length,
       itemBuilder: (context, index) {
         final expense = allExpenses[index];
         return ListTile(
           leading: expense.categoryImage != null
-              ? Image.asset(expense.categoryImage!, width: 24, height: 24)
+              ? Image.asset(expense.categoryImage!, width: 40, height: 40)
               : Icon(Icons.image_not_supported),
 
           title: TextWidget(

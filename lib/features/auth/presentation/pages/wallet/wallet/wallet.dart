@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:incomeexpensestracker/config/route/path.dart';
-import 'package:incomeexpensestracker/features/auth/presentation/pages/wallet/transacrion_content.dart';
-import 'package:incomeexpensestracker/features/auth/presentation/pages/wallet/upcoming_content.dart';
+import 'package:incomeexpensestracker/features/auth/presentation/pages/wallet/wallet/transacrion_content.dart';
+import 'package:incomeexpensestracker/features/auth/presentation/pages/wallet/wallet/upcoming_content.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/custom_navigation_bar.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/screen_layout.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/text_widget.dart';
@@ -100,7 +100,9 @@ class Wallet extends StatelessWidget {
                       Icons.add,
                       theme,
                       text: 'Add',
-                      ontap: () {},
+                      ontap: () {
+                        context.go(Path.addexpense);
+                      },
                     ),
 
                     SizedBox(width: 30.w),

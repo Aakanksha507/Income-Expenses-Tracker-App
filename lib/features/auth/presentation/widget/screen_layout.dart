@@ -13,7 +13,7 @@ class ScreenLayout extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          height: 257.h,
+          height: 345.h,
           width: 414.w,
           decoration: BoxDecoration(color: theme.primaryColor),
           child: dynamicWidget,
@@ -23,7 +23,7 @@ class ScreenLayout extends StatelessWidget {
           padding: const EdgeInsets.only(top: 165.0),
           child: Container(
             width: 414.w,
-            height: 500,
+            height: 560,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(30),

@@ -12,6 +12,7 @@ final expenseFormProvider =
 
 class ExpenseFormState {
   final ExpensesCategory? selectedCategory;
+  final ExpensesCategory? selectedCategoryImg;
   final String? amount;
   final String? date;
   final String? invoice;
@@ -21,16 +22,19 @@ class ExpenseFormState {
     this.amount,
     this.date,
     this.invoice,
+    this.selectedCategoryImg,
   });
 
   ExpenseFormState copyWith({
     ExpensesCategory? selectedCategory,
+    ExpensesCategory? selectedCategoryImg,
     String? amount,
     String? date,
     String? invoice,
   }) {
     return ExpenseFormState(
       selectedCategory: selectedCategory ?? this.selectedCategory,
+      selectedCategoryImg: selectedCategoryImg ?? this.selectedCategoryImg,
       amount: amount ?? this.amount,
       date: date ?? this.date,
       invoice: invoice ?? this.invoice,
@@ -43,6 +47,10 @@ class ExpenseFormNotifier extends StateNotifier<ExpenseFormState> {
 
   void setCategory(ExpensesCategory? category) {
     state = state.copyWith(selectedCategory: category);
+  }
+
+  void setCategoryImg(ExpensesCategory? selectedCategoryImg) {
+    state = state.copyWith(selectedCategoryImg: selectedCategoryImg);
   }
 
   void setAmount(String amount) {

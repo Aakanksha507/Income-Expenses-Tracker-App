@@ -93,6 +93,7 @@ class _AddExpenseState extends ConsumerState<AddExpense> {
       category: selectedCategory.label(context),
       amount: amount,
       date: date,
+      categoryImage: selectedCategory.getAssets(context),
     );
 
     final box = Hive.box<Expense>('expensesBox');

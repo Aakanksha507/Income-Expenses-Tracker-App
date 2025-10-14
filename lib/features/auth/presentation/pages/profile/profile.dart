@@ -9,6 +9,7 @@ import 'package:incomeexpensestracker/features/auth/presentation/widget/appbarhe
 import 'package:incomeexpensestracker/features/auth/presentation/widget/button_widget.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/custom_navigation_bar.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/custom_snack_bar.dart';
+import 'package:incomeexpensestracker/features/auth/presentation/widget/listtile_widget.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/text_widget.dart';
 
 class Profile extends StatefulWidget {
@@ -140,24 +141,24 @@ class _ProfileState extends State<Profile> {
             child: ListView(
               padding: EdgeInsets.symmetric(horizontal: 24.w),
               children: const [
-                _ProfileTile(
+                ProfileTile(
                   img: 'assets/images/diamond.svg',
                   label: 'Invite Friends',
                 ),
                 Divider(color: Colors.grey),
-                _ProfileTile(
+                ProfileTile(
                   img: 'assets/images/person.svg',
                   label: 'Account info',
                 ),
-                _ProfileTile(
+                ProfileTile(
                   img: 'assets/images/pp.svg',
                   label: 'Personal profile',
                 ),
-                _ProfileTile(
+                ProfileTile(
                   img: 'assets/images/msil.svg',
                   label: 'Message center',
                 ),
-                _ProfileTile(
+                ProfileTile(
                   img: 'assets/images/shield.svg',
                   label: 'Login and security',
                 ),
@@ -184,24 +185,6 @@ class _ProfileState extends State<Profile> {
         ],
       ),
       bottomNavigationBar: const CustomNavigationBar(),
-    );
-  }
-}
-
-class _ProfileTile extends StatelessWidget {
-  final String img;
-  final String label;
-
-  const _ProfileTile({required this.img, required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: SvgPicture.asset(img),
-      title: Text(label, style: TextStyle(fontSize: 16.sp)),
-      onTap: () {
-        CustomSnackBar.show(context, 'Coming Soon');
-      },
     );
   }
 }

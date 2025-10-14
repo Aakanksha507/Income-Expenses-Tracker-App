@@ -18,6 +18,12 @@ class AppTheme {
         buttonColor: Color(0xff3F8782),
         splashColor: Color(0xff69AEA9),
       ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(Color(0xffECF9F8)),
+        ),
+      ),
+
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: Color(0xff3F8782),
         splashColor: Color(0xff69AEA9),

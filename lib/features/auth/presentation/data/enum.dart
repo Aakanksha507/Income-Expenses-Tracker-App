@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 enum ExpensesCategory { upWork, paypal, youtube, netflix, starbucks, spotify }
 
@@ -36,6 +36,11 @@ extension ExpensesCategoryExtension on ExpensesCategory {
         return "assets/images/spotify.png";
     }
   }
+
+  bool get isIncome =>
+      this == ExpensesCategory.upWork || this == ExpensesCategory.paypal;
+
+  Color get amountColor => isIncome ? Colors.green : Colors.red;
 }
 
 

@@ -15,16 +15,19 @@ class Expense extends HiveObject {
 
   @HiveField(3)
   final String date;
-  
+
   @HiveField(4)
-final String? categoryImage;
+  final String? categoryImage;
 
+  @HiveField(5)
+  final String? invoicePath;
 
-  Expense( {
+  Expense({
     required this.userId,
     required this.category,
     required this.amount,
     required this.date,
     required this.categoryImage,
+    this.invoicePath,
   });
 }

@@ -82,32 +82,29 @@ class DropdownFieldWidget extends ConsumerWidget {
               fontSize: 14.sp,
             ),
           ),
-          items: ExpensesCategory.values
-              .where((category) => category != ExpensesCategory.upWork)
-              .map((category) {
-                return DropdownMenuItem<ExpensesCategory>(
-                  value: category,
-                  child: Row(
-                    children: [
-                      Image.asset(
-                        category.getAssets(context),
-                        width: 24,
-                        height: 24,
-                      ),
-                      SizedBox(width: 8),
-                      TextWidget(
-                        text: category.label(context),
-                        style: TextStyle(
-                          color: theme.textTheme.displaySmall?.color,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ],
+          items: ExpensesCategory.values.map((category) {
+            return DropdownMenuItem<ExpensesCategory>(
+              value: category,
+              child: Row(
+                children: [
+                  Image.asset(
+                    category.getAssets(context),
+                    width: 24,
+                    height: 24,
                   ),
-                );
-              })
-              .toList(),
+                  SizedBox(width: 8),
+                  TextWidget(
+                    text: category.label(context),
+                    style: TextStyle(
+                      color: theme.textTheme.displaySmall?.color,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }).toList(),
         ),
       ],
     );

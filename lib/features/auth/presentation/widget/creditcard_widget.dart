@@ -2,16 +2,25 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/text_widget.dart';
 
 class CreditcardWidget extends StatelessWidget {
-  final String? cardNumber;
-  const CreditcardWidget({super.key, this.cardNumber});
+  final double income;
+  final double expenses;
+  final double balance;
+
+  const CreditcardWidget({
+    super.key,
+    required this.income,
+    required this.expenses,
+    required this.balance,
+  });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Container(
@@ -24,7 +33,6 @@ class CreditcardWidget extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(top: 25.0, left: 20.0, right: 20),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
@@ -49,8 +57,9 @@ class CreditcardWidget extends StatelessWidget {
                   Icon(Icons.more_horiz),
                 ],
               ),
+
               TextWidget(
-                text: '\$123',
+                text: '\$${balance.toStringAsFixed(2)}',
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
@@ -58,6 +67,7 @@ class CreditcardWidget extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 25),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -78,7 +88,7 @@ class CreditcardWidget extends StatelessWidget {
                         ],
                       ),
                       TextWidget(
-                        text: '\$123',
+                        text: '\$${income.toStringAsFixed(2)}',
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -87,6 +97,7 @@ class CreditcardWidget extends StatelessWidget {
                       ),
                     ],
                   ),
+
                   Column(
                     children: [
                       Row(
@@ -107,7 +118,7 @@ class CreditcardWidget extends StatelessWidget {
                         ],
                       ),
                       TextWidget(
-                        text: '\$123',
+                        text: '\$${expenses.toStringAsFixed(2)}',
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -5,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive/hive.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:incomeexpensestracker/config/route/path.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/data/enum.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/data/model/expenses.dart';
@@ -94,6 +97,7 @@ class _AddExpenseState extends ConsumerState<AddExpense> {
       amount: amount,
       date: date,
       categoryImage: selectedCategory.getAssets(context),
+      invoicePath: selectedInvoiceImage?.path,
     );
 
     final box = Hive.box<Expense>('expensesBox');
@@ -103,6 +107,9 @@ class _AddExpenseState extends ConsumerState<AddExpense> {
     ref.read(selectedCategoryProvider.notifier).state = null;
     amountController.clear();
     dateController.clear();
+    setState(() {
+      selectedInvoiceImage = null;
+    });
 
     context.go(Path.homepage);
   }
@@ -126,6 +133,8 @@ class _AddExpenseState extends ConsumerState<AddExpense> {
 
     return '${days[date.weekday - 1]}, ${date.day} ${months[date.month - 1]} ${date.year}';
   }
+
+  File? selectedInvoiceImage;
 
   @override
   Widget build(BuildContext context) {
@@ -349,55 +358,88 @@ class _AddExpenseState extends ConsumerState<AddExpense> {
                       SizedBox(height: 25.h),
 
                       // INVOICE Field
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          TextWidget(
-                            text: 'INVOICE',
-                            style: TextStyle(
-                              color: theme.textTheme.titleSmall?.color,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 14.sp,
-                            ),
+                      TextWidget(
+                        text: 'INVOICE',
+                        style: TextStyle(
+                          color: theme.textTheme.titleSmall?.color,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14.sp,
+                        ),
+                      ),
+                      SizedBox(height: 8.h),
+                      GestureDetector(
+                        onTap: () async {
+                          final ImagePicker picker = ImagePicker();
+                          final XFile? image = await picker.pickImage(
+                            source: ImageSource.gallery,
+                          );
+
+                          if (image != null) {
+                            setState(() {
+                              selectedInvoiceImage = File(image.path);
+                            });
+                          }
+                        },
+                        child: Container(
+                          height: 50.h,
+                          padding: EdgeInsets.symmetric(horizontal: 16.w),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: const Color(0xFFCACACA)),
+                            borderRadius: BorderRadius.circular(8.r),
                           ),
-                          SizedBox(height: 8.h),
-                          GestureDetector(
-                            onTap: () {
-                              // Add invoice functionality
-                            },
-                            child: Container(
-                              height: 50.h,
-                              padding: EdgeInsets.symmetric(horizontal: 16.w),
-                              decoration: BoxDecoration(
-                                border: Border.all(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Add Invoice',
+                                style: TextStyle(
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w500,
                                   color: const Color(0xFFCACACA),
                                 ),
-                                borderRadius: BorderRadius.circular(8.r),
                               ),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    'Add Invoice',
-                                    style: TextStyle(
-                                      fontSize: 16.sp,
-                                      fontWeight: FontWeight.w500,
-                                      color: const Color(0xFFCACACA),
-                                    ),
-                                  ),
-                                  const Spacer(),
-                                  Icon(
-                                    Icons.add,
-                                    size: 20.w,
-                                    color: const Color(0xFFCACACA),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
 
-                      SizedBox(height: 40.h),
+                              Icon(
+                                Icons.add,
+                                size: 20.w,
+                                color: const Color(0xFFCACACA),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      if (selectedInvoiceImage != null)
+                        Padding(
+                          padding: EdgeInsets.only(top: 12.h, left: 100),
+                          child: Row(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(8.r),
+                                child: Image.file(
+                                  selectedInvoiceImage!,
+                                  width: 70.w,
+                                  height: 70.w,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              SizedBox(width: 12.w),
+                              IconButton(
+                                icon: Icon(
+                                  Icons.cancel,
+                                  color: Colors.red,
+                                  size: 24.w,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    selectedInvoiceImage = null;
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+
+                      SizedBox(height: 30.h),
 
                       // Submit Button
                       CustomButtonWidget(

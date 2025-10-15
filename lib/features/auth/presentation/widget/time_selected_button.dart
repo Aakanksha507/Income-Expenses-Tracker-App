@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class TimeSelectorTextOnly extends StatefulWidget {
-  const TimeSelectorTextOnly({super.key});
+  final void Function(String selected)? onSelected;
+
+  const TimeSelectorTextOnly({super.key, this.onSelected});
 
   @override
   _TimeSelectorTextOnlyState createState() => _TimeSelectorTextOnlyState();
@@ -34,6 +36,8 @@ class _TimeSelectorTextOnlyState extends State<TimeSelectorTextOnly> {
             setState(() {
               selectedOption = option;
             });
+
+            widget.onSelected?.call(option);
           },
           style: TextButton.styleFrom(
             padding: EdgeInsets.zero,

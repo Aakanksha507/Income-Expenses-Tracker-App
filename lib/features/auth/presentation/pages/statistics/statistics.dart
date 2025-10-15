@@ -6,6 +6,7 @@ import 'package:incomeexpensestracker/config/route/path.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/data/enum.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/data/model/expenses.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/provider/hive_data_provider.dart';
+import 'package:incomeexpensestracker/features/auth/presentation/provider/sorting_order_provider.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/custom_navigation_bar.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/text_widget.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/time_selected_button.dart';
@@ -32,8 +33,10 @@ class _StatisticsState extends ConsumerState<Statistics> {
   @override
   Widget build(BuildContext context) {
     final allExpenses = ref.watch(expensesBoxProvider).values.toList();
-
     final filteredData = getFilteredExpenseData(allExpenses, selectedPeriod);
+
+    // for storing list of expenses
+    final sortedExpenses = ref.watch(sortedExpensesProvider);
 
     return Scaffold(
       body: Padding(
@@ -69,7 +72,7 @@ class _StatisticsState extends ConsumerState<Statistics> {
               ],
             ),
 
-            const SizedBox(height: 40),
+            const SizedBox(height: 33),
 
             // Time Filter
             TimeSelectorTextOnly(
@@ -80,12 +83,12 @@ class _StatisticsState extends ConsumerState<Statistics> {
               },
             ),
 
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
 
             // Chart
             SfCartesianChart(
               primaryXAxis: CategoryAxis(),
-              title: ChartTitle(text: 'Expenses'),
+              // title: ChartTitle(text: 'Expenses'),
               tooltipBehavior: TooltipBehavior(enable: true),
               series: <LineSeries<SalesData, String>>[
                 LineSeries<SalesData, String>(
@@ -99,7 +102,7 @@ class _StatisticsState extends ConsumerState<Statistics> {
               ],
             ),
 
-            const SizedBox(height: 20),
+            const SizedBox(height: 15),
 
             // Top Spending
             Row(
@@ -109,8 +112,64 @@ class _StatisticsState extends ConsumerState<Statistics> {
                   text: 'Top Spending',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                SvgPicture.asset('assets/images/sync.svg'),
+                InkWell(
+                  onTap: () {
+                    ref
+                        .read(sortedExpensesProvider.notifier)
+                        .toggleSortOrder(); // it  will reverse the storing of items
+                  },
+                  child: SvgPicture.asset('assets/images/sync.svg'),
+                ), //
               ],
+            ),
+
+            Expanded(
+              child: ListView.builder(
+                padding: EdgeInsets.zero,
+                itemCount: sortedExpenses.length,
+                itemBuilder: (context, index) {
+                  final expense = sortedExpenses[index];
+                  final category = ExpensesCategory.values.firstWhere(
+                    (e) =>
+                        e.name.toLowerCase() == expense.category.toLowerCase(),
+                    orElse: () => ExpensesCategory.youtube,
+                  );
+                  final color = category.amountColor;
+
+                  return ListTile(
+                    leading: expense.categoryImage != null
+                        ? Image.asset(
+                            expense.categoryImage!,
+                            width: 24,
+                            height: 24,
+                          )
+                        : const Icon(Icons.image_not_supported),
+
+                    title: TextWidget(
+                      text: expense.category,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    subtitle: TextWidget(
+                      text: expense.date,
+                      style: const TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                    trailing: TextWidget(
+                      text: '\$${expense.amount}',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: color,
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
           ],
         ),
@@ -119,6 +178,7 @@ class _StatisticsState extends ConsumerState<Statistics> {
     );
   }
 
+  //expenses data
   List<SalesData> getFilteredExpenseData(
     List<Expense> allExpenses,
     String filter,

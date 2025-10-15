@@ -8,7 +8,7 @@ extension ExpensesCategoryExtension on ExpensesCategory {
       case ExpensesCategory.upWork:
         return "UpWork";
       case ExpensesCategory.paypal:
-        return "Pay Pal";
+        return "PayPal";
       case ExpensesCategory.youtube:
         return "Youtube";
       case ExpensesCategory.netflix:
@@ -42,61 +42,3 @@ extension ExpensesCategoryExtension on ExpensesCategory {
 
   Color get amountColor => isIncome ? Colors.green : Colors.red;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// //   String get amountSign {
-// //   return this == ExpensesCategory.salaries ? '+' : '-';
-// // }
-
-// Color? get amountColor {
-//   return this == ExpensesCategory.salaries
-//       ? AppColor.primary1 
-//       :  AppColor.semantic1; 
-// }
-
-
-// static ExpensesCategory fromString(String value) {
-//   return ExpensesCategory.values.firstWhere(
-//     (e) => e.name.toLowerCase() == value.toLowerCase(),
-//     orElse: () {
-//       debugPrint('Unknown category: $value. Defaulting to transportation.');
-//       return ExpensesCategory.transportation; 
-//     },
-//   );
-// }
-
-  
-// }

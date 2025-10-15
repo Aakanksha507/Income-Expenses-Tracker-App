@@ -11,6 +11,7 @@ import 'package:incomeexpensestracker/features/auth/presentation/pages/wallet/bi
 import 'package:incomeexpensestracker/features/auth/presentation/pages/wallet/bills/bill_payment.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/pages/wallet/connect_wallet/connect_wallet.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/pages/wallet/wallet/wallet.dart';
+import 'package:incomeexpensestracker/features/auth/presentation/widget/seletec_container_screen.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: Path.loginStatus,
@@ -47,6 +48,16 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: Path.billpayment,
       builder: (context, state) => const BillPayment(),
+    ),
+    GoRoute(
+      path: Path.select,
+      builder: (context, state) => SelectableContainersScreen(
+        // cardName: cardNameController.text,
+        // cardNumber: cardNumberController.text,
+        // cvc: cvcController.text,
+        // expiry: dateController.text,
+        // zip: zipController.text,
+      ),
     ),
   ],
 );

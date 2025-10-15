@@ -108,25 +108,25 @@ class _TextFormWidgetState extends State<TextFormWidget> {
             fontSize: 14.sp,
           ),
           decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(8.r),
               borderSide: BorderSide(color: Color(0xFFCACACA)),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(8.r),
               borderSide: BorderSide(color: Colors.grey),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(8.r),
               borderSide: BorderSide(color: theme.primaryColor, width: 1.5),
             ),
             errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(8.r),
               borderSide: BorderSide(color: Colors.red),
             ),
             focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(8.r),
               borderSide: BorderSide(color: Colors.red, width: 1.5),
             ),
             hintText: widget.hintText,
@@ -140,13 +140,13 @@ class _TextFormWidgetState extends State<TextFormWidget> {
                 ? InkWell(
                     onTap: _clearText,
                     child: Padding(
-                      padding: EdgeInsets.only(top: 12),
+                      padding: EdgeInsets.only(top: 12.h),
                       child: TextWidget(
                         text: 'clear',
 
                         style: TextStyle(
                           color: theme.primaryColor,
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.normal,
                         ),
                         //   icon: Icon(Icons.clear, size: 20),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive/hive.dart';
@@ -24,18 +25,18 @@ class Onboarding extends ConsumerWidget {
             children: [
               SvgPicture.asset('assets/images/bg.svg'),
               Positioned(
-                top: 120.5,
-                left: 55,
+                top: 120.5.h,
+                left: 55.w,
                 child: Image.asset('assets/images/coint.png'),
               ),
               Positioned(
-                top: 110.5,
-                left: 55,
+                top: 110.5.h,
+                left: 55.w,
                 child: Image.asset('assets/images/man.png'),
               ),
               Positioned(
-                top: 168.5,
-                left: 260.6,
+                top: 168.5.h,
+                left: 260.6.w,
                 child: Image.asset('assets/images/donut.png'),
               ),
             ],
@@ -51,7 +52,7 @@ class Onboarding extends ConsumerWidget {
                 text: 'Spend Smarter',
                 style: TextStyle(
                   color: theme.textTheme.bodyLarge!.color!,
-                  fontSize: 36,
+                  fontSize: 36.sp,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -61,17 +62,17 @@ class Onboarding extends ConsumerWidget {
                   height: 0,
 
                   color: theme.textTheme.bodyLarge!.color!,
-                  fontSize: 36,
+                  fontSize: 36.sp,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 20.h),
               CustomButtonWidget(
                 buttonName: 'Continue with Google',
                 textStyle: TextStyle(
                   color: theme.textTheme.displayMedium!.color!,
                   fontWeight: FontWeight.bold,
-                  fontSize: 16,
+                  fontSize: 16.sp,
                 ),
                 onPressed: state.isLoading
                     ? null
@@ -117,8 +118,8 @@ class Onboarding extends ConsumerWidget {
                 // },
                 child: state.isLoading
                     ? SizedBox(
-                        height: 24,
-                        width: 24,
+                        height: 24.h,
+                        width: 24.w,
                         child: CircularProgressIndicator(
                           color: Colors.white,
                           strokeWidth: 2,

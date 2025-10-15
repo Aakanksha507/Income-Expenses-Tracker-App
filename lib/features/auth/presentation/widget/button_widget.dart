@@ -12,6 +12,8 @@ class CustomButtonWidget extends StatelessWidget {
   final Widget? child;
   final TextStyle? textStyle;
   final double? height;
+  final BoxBorder? border;
+  final BorderRadiusGeometry? borderRadius;
 
   const CustomButtonWidget({
     super.key,
@@ -23,6 +25,8 @@ class CustomButtonWidget extends StatelessWidget {
     this.child,
     this.textStyle,
     this.height,
+    this.border,
+    this.borderRadius,
   });
 
   @override
@@ -37,6 +41,7 @@ class CustomButtonWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(40.r),
         child: Container(
           height: height ?? 67.h,
+          decoration: BoxDecoration(border: border, borderRadius: borderRadius),
           width: 353.w,
           alignment: Alignment.center,
           child: child != null

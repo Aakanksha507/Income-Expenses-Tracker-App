@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:incomeexpensestracker/config/route/path.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/text_widget.dart';
 
 class CustomElevatedButton extends StatelessWidget {
@@ -26,8 +28,7 @@ class CustomElevatedButton extends StatelessWidget {
       onPressed:
           onPressed ??
           () {
-            // context.go(Path.connect);
-            context.pop();
+            context.go(Path.connect);
           },
       child:
           child ??
@@ -35,7 +36,7 @@ class CustomElevatedButton extends StatelessWidget {
             text: 'pay',
             style: TextStyle(
               fontWeight: FontWeight.w500,
-              fontSize: 16,
+              fontSize: 16.sp,
               color: theme.primaryColor,
             ),
           ),

@@ -28,7 +28,7 @@ class Wallet extends ConsumerWidget {
       child: Scaffold(
         body: ScreenLayout(
           dynamicWidget: Padding(
-            padding: const EdgeInsets.only(left: 24.0, right: 24.0, top: 66),
+            padding: EdgeInsets.only(left: 24.0.w, right: 24.0.w, top: 66.h),
             child: Stack(
               children: [
                 Column(
@@ -48,15 +48,15 @@ class Wallet extends ConsumerWidget {
                           style: TextStyle(
                             color: theme.textTheme.displayMedium!.color,
                             fontWeight: FontWeight.w600,
-                            fontSize: 18,
+                            fontSize: 18.sp,
                           ),
                         ),
                         Material(
                           color: Colors.transparent,
-                          borderRadius: BorderRadius.circular(5.sp),
+                          borderRadius: BorderRadius.circular(5.r),
                           child: InkWell(
                             splashColor: Colors.transparent,
-                            borderRadius: BorderRadius.circular(5.sp),
+                            borderRadius: BorderRadius.circular(5.r),
                             onTap: () {},
                             child: Icon(
                               Icons.notifications_none_outlined,
@@ -75,7 +75,7 @@ class Wallet extends ConsumerWidget {
           dynamicWidget2: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 50),
+              SizedBox(height: 50.h),
               Center(
                 child: Column(
                   children: [
@@ -84,7 +84,7 @@ class Wallet extends ConsumerWidget {
                       style: TextStyle(
                         color: theme.textTheme.titleSmall!.color,
                         fontWeight: FontWeight.w500,
-                        fontSize: 16,
+                        fontSize: 16.sp,
                       ),
                     ),
                     SizedBox(height: 10.h),
@@ -93,7 +93,7 @@ class Wallet extends ConsumerWidget {
                       style: TextStyle(
                         color: theme.textTheme.displaySmall!.color,
                         fontWeight: FontWeight.bold,
-                        fontSize: 30,
+                        fontSize: 30.sp,
                       ),
                     ),
                   ],
@@ -101,7 +101,7 @@ class Wallet extends ConsumerWidget {
               ),
 
               Padding(
-                padding: const EdgeInsets.only(top: 30.0, left: 80),
+                padding: EdgeInsets.only(top: 30.0.h, left: 80.w),
                 child: Row(
                   children: [
                     _buildCircleIcon(
@@ -140,10 +140,10 @@ class Wallet extends ConsumerWidget {
 
               /// TabBar
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                padding: EdgeInsets.symmetric(horizontal: 10.0.w),
                 child: Container(
-                  height: 48,
-                  width: 374,
+                  height: 48.h,
+                  width: 374.w,
                   decoration: BoxDecoration(
                     color: Color(0xffF4F6F6),
                     borderRadius: BorderRadius.circular(30.r),
@@ -156,7 +156,7 @@ class Wallet extends ConsumerWidget {
                     labelStyle: const TextStyle(fontWeight: FontWeight.w600),
                     padding: EdgeInsets.all(4),
                     indicator: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(30.r),
                       color: Colors.white,
                     ),
                     tabs: [
@@ -190,17 +190,17 @@ class Wallet extends ConsumerWidget {
     return Column(
       children: [
         Container(
-          height: 60,
-          width: 60,
+          height: 60.h,
+          width: 60.w,
           decoration: BoxDecoration(
             color: Colors.white,
             border: Border.all(color: theme.primaryColor),
-            borderRadius: BorderRadius.circular(50),
+            borderRadius: BorderRadius.circular(50.r),
           ),
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              borderRadius: BorderRadius.circular(50),
+              borderRadius: BorderRadius.circular(50.r),
               splashColor: Colors.grey[200],
               onTap: ontap,
               child: Center(

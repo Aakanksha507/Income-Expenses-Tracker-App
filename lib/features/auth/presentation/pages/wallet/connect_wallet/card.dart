@@ -183,16 +183,30 @@ class _CardWalletState extends ConsumerState<CardWallet> {
                 SizedBox(height: 15.h),
                 Column(
                   children: [
-                    TextFormWidget(hintText: 'CARD NAME'),
+                    TextFormWidget(
+                      hintText: 'CARD NAME',
+
+                      controller: cardNameController,
+                    ),
                     SizedBox(height: 10.h),
                     Row(
                       children: [
                         Expanded(
                           flex: 2,
-                          child: TextFormWidget(hintText: 'DEBIT CARD NUMBER'),
+                          child: TextFormWidget(
+                            hintText: 'DEBIT CARD NUMBER',
+                            controller: cardNumberController,
+                            keyboardType: TextInputType.number,
+                          ),
                         ),
                         SizedBox(width: 10.w),
-                        Expanded(child: TextFormWidget(hintText: 'CVC')),
+                        Expanded(
+                          child: TextFormWidget(
+                            hintText: 'CVC',
+                            keyboardType: TextInputType.number,
+                            controller: cvcController,
+                          ),
+                        ),
                       ],
                     ),
                     SizedBox(height: 10.h),
@@ -259,7 +273,13 @@ class _CardWalletState extends ConsumerState<CardWallet> {
                         ),
 
                         SizedBox(width: 10.w),
-                        Expanded(child: TextFormWidget(hintText: 'ZIP')),
+                        Expanded(
+                          child: TextFormWidget(
+                            hintText: 'ZIP',
+                            keyboardType: TextInputType.number,
+                            controller: zipController,
+                          ),
+                        ),
                       ],
                     ),
                   ],

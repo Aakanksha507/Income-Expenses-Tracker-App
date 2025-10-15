@@ -20,13 +20,13 @@ class ScreenLayout extends StatelessWidget {
         ),
         SvgPicture.asset('assets/images/top_bg.svg'),
         Padding(
-          padding: const EdgeInsets.only(top: 165.0),
+          padding:  EdgeInsets.only(top: 165.0.h),
           child: Container(
             width: 414.w,
-            height: 560,
+            height: 560.h,
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(30.r),
             ),
             child: dynamicWidget2,
           ),

@@ -20,8 +20,8 @@ class AppBarHeader extends StatelessWidget {
         ),
         // color: theme.primaryColor,
         borderRadius: BorderRadius.only(
-          bottomRight: Radius.elliptical(270, 47),
-          bottomLeft: Radius.elliptical(270, 47),
+          bottomRight: Radius.elliptical(270.r, 47.r),
+          bottomLeft: Radius.elliptical(270.r, 47.r),
         ),
       ),
       child: dynamicWidget,

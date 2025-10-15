@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/data/enum.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/provider/hive_data_provider.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/text_widget.dart';
@@ -28,21 +29,21 @@ class TransactionContent extends ConsumerWidget {
 
         return ListTile(
           leading: expense.categoryImage != null
-              ? Image.asset(expense.categoryImage!, width: 40, height: 40)
+              ? Image.asset(expense.categoryImage!, width: 50.w, height: 50.h)
               : Icon(Icons.image_not_supported),
 
           title: TextWidget(
             text: category.label(context),
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+            style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500),
           ),
           subtitle: TextWidget(
             text: expense.date,
-            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w300),
+            style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w300),
           ),
           trailing: Text(
             '\$${expense.amount}',
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 18.sp,
               fontWeight: FontWeight.w500,
               color: color,
             ),

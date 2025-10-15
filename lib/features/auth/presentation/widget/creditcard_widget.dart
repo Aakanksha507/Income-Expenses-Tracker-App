@@ -22,7 +22,7 @@ class CreditcardWidget extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: EdgeInsets.all(20.0),
       child: Container(
         height: 201.h,
         width: 374.w,
@@ -31,7 +31,7 @@ class CreditcardWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ),
         child: Padding(
-          padding: const EdgeInsets.only(top: 25.0, left: 20.0, right: 20),
+          padding: EdgeInsets.only(top: 25.0.h, left: 20.0.w, right: 20.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -43,7 +43,7 @@ class CreditcardWidget extends StatelessWidget {
                       TextWidget(
                         text: 'Total Balance',
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 16.sp,
                           fontWeight: FontWeight.w500,
                           color: theme.textTheme.displayMedium!.color!,
                         ),
@@ -61,12 +61,12 @@ class CreditcardWidget extends StatelessWidget {
               TextWidget(
                 text: '\$${balance.toStringAsFixed(2)}',
                 style: TextStyle(
-                  fontSize: 30,
+                  fontSize: 30.sp,
                   fontWeight: FontWeight.bold,
                   color: theme.textTheme.displayMedium!.color!,
                 ),
               ),
-              SizedBox(height: 25),
+              SizedBox(height: 25.h),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -80,7 +80,7 @@ class CreditcardWidget extends StatelessWidget {
                           TextWidget(
                             text: 'Income',
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.w500,
                               color: theme.textTheme.displayMedium!.color!,
                             ),
@@ -90,7 +90,7 @@ class CreditcardWidget extends StatelessWidget {
                       TextWidget(
                         text: '\$${income.toStringAsFixed(2)}',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 20.sp,
                           fontWeight: FontWeight.bold,
                           color: theme.textTheme.displayMedium!.color!,
                         ),
@@ -106,11 +106,11 @@ class CreditcardWidget extends StatelessWidget {
                             angle: pi,
                             child: SvgPicture.asset('assets/images/arrow.svg'),
                           ),
-                          SizedBox(width: 5),
+                          SizedBox(width: 5.h),
                           TextWidget(
                             text: 'Expenses',
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.w500,
                               color: theme.textTheme.displayMedium!.color!,
                             ),
@@ -120,7 +120,7 @@ class CreditcardWidget extends StatelessWidget {
                       TextWidget(
                         text: '\$${expenses.toStringAsFixed(2)}',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 20.sp,
                           fontWeight: FontWeight.bold,
                           color: theme.textTheme.displayMedium!.color!,
                         ),

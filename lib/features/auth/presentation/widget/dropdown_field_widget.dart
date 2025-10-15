@@ -31,7 +31,7 @@ class DropdownFieldWidget extends ConsumerWidget {
             style: TextStyle(
               color: theme.textTheme.titleSmall?.color,
               fontWeight: FontWeight.w600,
-              fontSize: 12,
+              fontSize: 12.sp,
             ),
           ),
           SizedBox(height: 8.h),
@@ -54,26 +54,29 @@ class DropdownFieldWidget extends ConsumerWidget {
                 return null;
               },
           decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 16.w,
+              vertical: 12.h,
+            ),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(8.r),
               borderSide: BorderSide(color: Color(0xFFCACACA)),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(8.r),
               borderSide: BorderSide(color: Colors.grey),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: theme.primaryColor, width: 1.5),
+              borderRadius: BorderRadius.circular(8.r),
+              borderSide: BorderSide(color: theme.primaryColor, width: 1.5.w),
             ),
             errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(8.r),
               borderSide: BorderSide(color: Colors.red),
             ),
             focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: Colors.red, width: 1.5),
+              borderRadius: BorderRadius.circular(8.r),
+              borderSide: BorderSide(color: Colors.red, width: 1.5.w),
             ),
             hintText: hintText ?? 'Select category',
             hintStyle: TextStyle(
@@ -89,16 +92,16 @@ class DropdownFieldWidget extends ConsumerWidget {
                 children: [
                   Image.asset(
                     category.getAssets(context),
-                    width: 24,
-                    height: 24,
+                    width: 24.w,
+                    height: 24.h,
                   ),
-                  SizedBox(width: 8),
+                  SizedBox(width: 8.w),
                   TextWidget(
                     text: category.label(context),
                     style: TextStyle(
                       color: theme.textTheme.displaySmall?.color,
                       fontWeight: FontWeight.w400,
-                      fontSize: 14,
+                      fontSize: 14.sp,
                     ),
                   ),
                 ],

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:incomeexpensestracker/config/route/path.dart';
-import 'package:incomeexpensestracker/features/auth/presentation/pages/wallet/connect_wallet/account.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/pages/wallet/connect_wallet/card.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/custom_navigation_bar.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/screen_layout.dart';
+import 'package:incomeexpensestracker/features/auth/presentation/widget/seletec_container_screen.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/text_widget.dart';
 
 class ConnectWallet extends StatelessWidget {
@@ -103,7 +103,8 @@ class ConnectWallet extends StatelessWidget {
                   children: [
                     //Tab 1
                     CardWallet(),
-                    Account(),
+                    SelectableContainersScreen(),
+                    // Account(),
                   ],
                 ),
               ),

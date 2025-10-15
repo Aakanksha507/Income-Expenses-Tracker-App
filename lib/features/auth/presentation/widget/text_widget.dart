@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TextWidget extends StatelessWidget {
   final String text;
@@ -9,7 +10,7 @@ class TextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: style ?? TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      style: style ?? TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
     );
   }
 }

@@ -27,6 +27,7 @@ class AppTheme {
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: Color(0xff3F8782),
         splashColor: Color(0xff69AEA9),
+        
       ),
       cardTheme: CardThemeData(color: Colors.white),
       iconTheme: IconThemeData(color: Colors.white),

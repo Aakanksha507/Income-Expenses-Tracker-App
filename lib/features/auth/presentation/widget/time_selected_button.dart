@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TimeSelectorTextOnly extends StatefulWidget {
   final void Function(String selected)? onSelected;
@@ -27,7 +28,7 @@ class _TimeSelectorTextOnlyState extends State<TimeSelectorTextOnly> {
           style: TextStyle(
             color: isSelected ? Colors.white : Colors.grey[700],
             fontWeight: isSelected ? FontWeight.bold : FontWeight.w400,
-            fontSize: 13,
+            fontSize: 13.sp,
           ),
         );
 
@@ -46,13 +47,13 @@ class _TimeSelectorTextOnlyState extends State<TimeSelectorTextOnly> {
           ),
           child: isSelected
               ? Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 33,
-                    vertical: 12,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 33.w,
+                    vertical: 12.h,
                   ),
                   decoration: BoxDecoration(
                     color: theme.primaryColor,
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(10.r),
                   ),
                   child: textWidget,
                 )

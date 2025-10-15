@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:incomeexpensestracker/features/auth/presentation/widget/button_widget.dart';
 
 class SelectableContainersScreen extends StatefulWidget {
-  const SelectableContainersScreen({super.key});
+  //   final String cardName;
+  // final String cardNumber;
+  // final String cvc;
+  // final String expiry;
+  // final String zip;
+
+  const SelectableContainersScreen({
+    super.key,
+    // required this.cardName,
+    // required this.cardNumber,
+    // required this.cvc,
+    // required this.expiry,
+    // required this.zip,
+  });
 
   @override
   State<SelectableContainersScreen> createState() =>
@@ -11,46 +25,54 @@ class SelectableContainersScreen extends StatefulWidget {
 
 class _SelectableContainersScreenState
     extends State<SelectableContainersScreen> {
-  int _selectedIndex = -1;
+  int _selectedIndex = 1;
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      body: SingleChildScrollView(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            minHeight: MediaQuery.of(context).size.height,
-          ),
-          child: IntrinsicHeight(
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 30.h),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  _buildSelectableContainer(
-                    0,
-                    'Bank Link',
-                    'Connect your bank account to deposit & fund',
-                    Icons.account_balance,
-                  ),
-                  SizedBox(height: 15.h),
-                  _buildSelectableContainer(
-                    1,
-                    'Microdeposits',
-                    'Connect bank in 5-7 days',
-                    Icons.paid_sharp,
-                  ),
-                  SizedBox(height: 15.h),
-                  _buildSelectableContainer(
-                    2,
-                    'Paypal',
-                    'Connect your PayPal account',
-                    Icons.paypal,
-                  ),
-                ],
+      body: Padding(
+        padding: EdgeInsetsGeometry.only(left: 35.w, right: 35.w),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            _buildSelectableContainer(
+              0,
+              'Bank Link',
+              'Connect your bank account to deposit & fund',
+              Icons.account_balance,
+            ),
+            SizedBox(height: 15.h),
+            _buildSelectableContainer(
+              1,
+              'Microdeposits',
+              'Connect bank in 5-7 days',
+              Icons.paid_sharp,
+            ),
+            SizedBox(height: 15.h),
+            _buildSelectableContainer(
+              2,
+              'Paypal',
+              'Connect your PayPal account',
+              Icons.account_balance_wallet_outlined,
+            ),
+            SizedBox(height: 100.h),
+
+            CustomButtonWidget(
+              buttonName: 'Next',
+              textStyle: TextStyle(
+                fontSize: 18.sp,
+                color: theme.textTheme.bodyLarge!.color,
+                fontWeight: FontWeight.w700,
+              ),
+              buttonColor: Colors.white,
+              borderRadius: BorderRadius.circular(30.r),
+              border: Border.all(
+                color: theme.primaryColor,
+                style: BorderStyle.solid,
               ),
             ),
-          ),
+          ],
         ),
       ),
     );

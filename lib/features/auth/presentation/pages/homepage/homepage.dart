@@ -2,36 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/data/enum.dart';
-import 'package:incomeexpensestracker/features/auth/presentation/data/model/expenses.dart';
-import 'package:incomeexpensestracker/features/auth/presentation/pages/alert_dialogue/alert_provider.dart';
-import 'package:incomeexpensestracker/features/auth/presentation/pages/alert_dialogue/dilog_state.dart';
+import 'package:incomeexpensestracker/features/auth/presentation/pages/alert_dialogue/alert_dialogue.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/provider/hive_data_provider.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/appbarheader.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/creditcard_widget.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/custom_navigation_bar.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/text_widget.dart';
-
-Map<String, double> calculateTotals(List<Expense> expenses) {
-  double income = 0;
-  double expense = 0;
-
-  for (var e in expenses) {
-    final amount = double.tryParse(e.amount) ?? 0;
-
-    final category = ExpensesCategory.values.firstWhere(
-      (c) => c.name.toLowerCase() == e.category.toLowerCase(),
-      orElse: () => ExpensesCategory.youtube,
-    );
-
-    if (category.isIncome) {
-      income += amount;
-    } else {
-      expense += amount;
-    }
-  }
-
-  return {'income': income, 'expenses': expense, 'balance': income - expense};
-}
+import 'package:incomeexpensestracker/features/auth/presentation/widget/total_balance.dart';
 
 class Homepage extends ConsumerStatefulWidget {
   const Homepage({super.key});
@@ -43,20 +20,6 @@ class Homepage extends ConsumerStatefulWidget {
 class _HomepageState extends ConsumerState<Homepage> {
   String userName = '';
   String category = '';
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   var box = Hive.box('userBox');
-  //   setState(() {
-  //     userName = box.get('name', defaultValue: 'User');
-  //   });
-
-  //   var expensesBox = Hive.box<Expense>('expensesBox');
-  //   setState(() {
-  //     category = box.get<Expense>('category');
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -72,29 +35,6 @@ class _HomepageState extends ConsumerState<Homepage> {
     final balance = totals['balance']!;
 
     //to fo show dialogue state
-    final isLoading = ref.watch(showDialogProvider);
-    ref.listen<DialogState>(dialogProvider, (previous, next) {
-      if (next.isShowing && !previous!.isShowing) {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text('Alert'),
-              content: Text(next.message ?? 'No message provided.'),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    ref.read(dialogProvider.notifier).hideDialog();
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('OK'),
-                ),
-              ],
-            );
-          },
-        );
-      }
-    });
 
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
@@ -167,7 +107,7 @@ class _HomepageState extends ConsumerState<Homepage> {
                 ),
                 SizedBox(height: 5),
                 SizedBox(
-                  height: 280,
+                  height: 380,
                   child: ListView.builder(
                     padding: EdgeInsets.zero,
                     itemCount: allExpenses.length,
@@ -233,25 +173,25 @@ class _HomepageState extends ConsumerState<Homepage> {
                   ),
                 ),
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TextWidget(
-                      text: 'Send Again',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    TextWidget(
-                      text: 'See all',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w100,
-                      ),
-                    ),
-                  ],
-                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     TextWidget(
+                //       text: 'Send Again',
+                //       style: TextStyle(
+                //         fontSize: 18,
+                //         fontWeight: FontWeight.bold,
+                //       ),
+                //     ),
+                //     TextWidget(
+                //       text: 'See all',
+                //       style: TextStyle(
+                //         fontSize: 16,
+                //         fontWeight: FontWeight.w100,
+                //       ),
+                //     ),
+                //   ],
+                // ),
               ],
             ),
           ),
@@ -263,34 +203,19 @@ class _HomepageState extends ConsumerState<Homepage> {
         splashColor: theme.floatingActionButtonTheme.splashColor,
         backgroundColor: theme.floatingActionButtonTheme.backgroundColor,
 
-        onPressed: isLoading
-            ? null
-            : () {
-                // context.go(Path.addexpense);
+        onPressed: () {
+          // context.go(Path.addexpense);
 
-                // showDialog(
-                //   context: context,
-                //   builder: (context) => AlertDialogueWidget(
-                //     onPressed: () {
-                //       Navigator.of(context).pop();
-                //     },
-                //   ),
-                // );
-                ref.read(showDialogProvider);
-                ref
-                    .read(dialogProvider.notifier)
-                    .showDialog(message: 'This is a message from Riverpod!');
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialogueWidget(
+              onPressed: () {
+                Navigator.of(context).pop();
               },
-        child: isLoading
-            ? SizedBox(
-                height: 24,
-                width: 24,
-                child: CircularProgressIndicator(
-                  color: Colors.white,
-                  strokeWidth: 2,
-                ),
-              )
-            : Icon(Icons.add, color: Colors.white),
+            ),
+          );
+        },
+        child: Icon(Icons.add, color: Colors.white),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: CustomNavigationBar(),

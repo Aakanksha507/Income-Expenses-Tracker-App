@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive/hive.dart';
 import 'package:incomeexpensestracker/config/route/path.dart';
+import 'package:incomeexpensestracker/features/auth/presentation/pages/alert_dialogue/alert_provider.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/appbarheader.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/button_widget.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/custom_navigation_bar.dart';
@@ -12,14 +14,14 @@ import 'package:incomeexpensestracker/features/auth/presentation/widget/custom_s
 import 'package:incomeexpensestracker/features/auth/presentation/widget/listtile_widget.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/text_widget.dart';
 
-class Profile extends StatefulWidget {
+class Profile extends ConsumerStatefulWidget {
   const Profile({super.key});
 
   @override
-  State<Profile> createState() => _ProfileState();
+  ConsumerState<Profile> createState() => _ProfileState();
 }
 
-class _ProfileState extends State<Profile> {
+class _ProfileState extends ConsumerState<Profile> {
   String userName = '';
   String email = '';
   String photoUrl = '';
@@ -38,6 +40,7 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isLoading = ref.watch(showLoadingState);
     return Scaffold(
       body: Column(
         children: [
@@ -175,11 +178,26 @@ class _ProfileState extends State<Profile> {
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
               ),
-              onPressed: () async {
-                await FirebaseAuth.instance.signOut();
-                CustomSnackBar.show(context, 'Sign out Successfully');
-                context.go(Path.onBoarding);
-              },
+              onPressed: isLoading
+                  ? null
+                  : () async {
+                      //loading
+                      ref.read(showLoadingState.notifier).state = true;
+                      await Future.delayed(Duration(seconds: 2));
+                      ref.read(showLoadingState.notifier).state = false;
+
+                      //for signout
+                      await FirebaseAuth.instance.signOut();
+                      CustomSnackBar.show(context, 'Sign out Successfully');
+                      context.go(Path.onBoarding);
+                    },
+              child: isLoading
+                  ? SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(strokeWidth: 1),
+                    )
+                  : null,
             ),
           ),
         ],

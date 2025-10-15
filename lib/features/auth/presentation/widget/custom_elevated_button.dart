@@ -3,7 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/text_widget.dart';
 
 class CustomElevatedButton extends StatelessWidget {
-  const CustomElevatedButton({super.key});
+  final Widget? child;
+  final void Function()? onPressed;
+  const CustomElevatedButton({super.key, this.child, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -21,18 +23,22 @@ class CustomElevatedButton extends StatelessWidget {
         }),
         backgroundColor: theme.elevatedButtonTheme.style!.backgroundColor,
       ),
-      onPressed: () {
-        // context.go(Path.connect);
-        context.pop();
-      },
-      child: TextWidget(
-        text: 'pay',
-        style: TextStyle(
-          fontWeight: FontWeight.w500,
-          fontSize: 16,
-          color: theme.primaryColor,
-        ),
-      ),
+      onPressed:
+          onPressed ??
+          () {
+            // context.go(Path.connect);
+            context.pop();
+          },
+      child:
+          child ??
+          TextWidget(
+            text: 'pay',
+            style: TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 16,
+              color: theme.primaryColor,
+            ),
+          ),
     );
   }
 }

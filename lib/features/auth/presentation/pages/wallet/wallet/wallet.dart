@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:incomeexpensestracker/config/route/path.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/pages/wallet/wallet/transacrion_content.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/pages/wallet/wallet/upcoming_content.dart';
+import 'package:incomeexpensestracker/features/auth/presentation/provider/hive_data_provider.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/custom_navigation_bar.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/screen_layout.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/text_widget.dart';
+import 'package:incomeexpensestracker/features/auth/presentation/widget/total_balance.dart';
 
-class Wallet extends StatelessWidget {
+class Wallet extends ConsumerWidget {
   const Wallet({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final expensesBox = ref.watch(expensesBoxProvider);
+    final allExpenses = expensesBox.values.toList();
+    final totals = calculateTotals(allExpenses);
+
+    final balance = totals['balance']!;
 
     return DefaultTabController(
       length: 2,
@@ -81,7 +89,7 @@ class Wallet extends StatelessWidget {
                     ),
                     SizedBox(height: 10.h),
                     TextWidget(
-                      text: '\$1234.0',
+                      text: '\$${balance}',
                       style: TextStyle(
                         color: theme.textTheme.displaySmall!.color,
                         fontWeight: FontWeight.bold,

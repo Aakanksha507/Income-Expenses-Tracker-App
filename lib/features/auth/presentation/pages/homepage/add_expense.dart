@@ -145,40 +145,42 @@ class _AddExpenseState extends ConsumerState<AddExpense> {
       resizeToAvoidBottomInset: true,
       body: Stack(
         children: [
-          SvgPicture.asset('assets/images/top_bg.svg'),
           AppBarHeader(
-            dynamicWidget: Padding(
-              padding: const EdgeInsets.only(left: 24.0, right: 24.0, top: 66),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  InkWell(
-                    onTap: () => context.go(Path.homepage),
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      size: 20,
-                      color: theme.iconTheme.color,
-                    ),
+            dynamicWidget: Stack(
+              children: [
+                SvgPicture.asset('assets/images/top_bg.svg'),
+                Positioned(
+                  top: 66.h,
+                  left: 24.w,
+                  right: 24.w,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      InkWell(
+                        onTap: () => context.go(Path.homepage),
+                        child: const Icon(Icons.arrow_back_ios, size: 20),
+                      ),
+                      TextWidget(
+                        text: 'Add Expense',
+                        style: TextStyle(
+                          color: theme.textTheme.displayMedium!.color,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18,
+                        ),
+                      ),
+                      Icon(
+                        Icons.more_horiz,
+                        color: theme.iconTheme.color,
+                        size: 35,
+                      ),
+                    ],
                   ),
-                  TextWidget(
-                    text: 'Add Expense',
-                    style: TextStyle(
-                      color: theme.textTheme.displayMedium!.color,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18,
-                    ),
-                  ),
-                  Icon(
-                    Icons.more_horiz,
-                    color: theme.iconTheme.color,
-                    size: 35,
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-          SvgPicture.asset('assets/images/top_bg.svg'),
+
           SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.only(top: 155.h, left: 28.w, right: 28.w),

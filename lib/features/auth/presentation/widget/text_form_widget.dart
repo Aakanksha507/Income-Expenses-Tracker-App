@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/text_widget.dart';
 
@@ -14,6 +15,7 @@ class TextFormWidget extends StatefulWidget {
   final Widget? suffixIcon;
   final bool autoFocus;
   final Color? color;
+  final TextInputFormatter? inputFormatters;
 
   const TextFormWidget({
     super.key,
@@ -28,6 +30,7 @@ class TextFormWidget extends StatefulWidget {
     this.suffixIcon,
     this.autoFocus = false,
     this.color,
+    this.inputFormatters,
   });
 
   @override
@@ -97,6 +100,10 @@ class _TextFormWidgetState extends State<TextFormWidget> {
         ],
 
         TextFormField(
+          inputFormatters: widget.inputFormatters != null
+              ? [widget.inputFormatters!]
+              : null,
+
           controller: _controller,
           focusNode: _focusNode,
           autofocus: widget.autoFocus,

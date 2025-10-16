@@ -9,7 +9,9 @@ import 'package:incomeexpensestracker/features/auth/presentation/pages/splash/sp
 import 'package:incomeexpensestracker/features/auth/presentation/pages/statistics/statistics.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/pages/wallet/bills/bill_details.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/pages/wallet/bills/bill_payment.dart';
+import 'package:incomeexpensestracker/features/auth/presentation/pages/wallet/bills/bill_payment_success.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/pages/wallet/connect_wallet/connect_wallet.dart';
+import 'package:incomeexpensestracker/features/auth/presentation/pages/wallet/transaction_details/transaction.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/pages/wallet/wallet/wallet.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/seletec_container_screen.dart';
 
@@ -58,6 +60,14 @@ final GoRouter router = GoRouter(
         // expiry: dateController.text,
         // zip: zipController.text,
       ),
+    ),
+    GoRoute(
+      path: Path.billpaymentsuccess,
+      builder: (context, state) => const BillPaymentSuccess(),
+    ),
+    GoRoute(
+      path: Path.transaction,
+      builder: (context, state) => const Transaction(),
     ),
   ],
 );

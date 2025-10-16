@@ -18,7 +18,7 @@ class SelectableContainersScreen extends ConsumerStatefulWidget {
 
 class _SelectableContainersScreenState
     extends ConsumerState<SelectableContainersScreen> {
-  int _selectedIndex = 1;
+  int _selectedIndex = -1;
 
   @override
   Widget build(BuildContext context) {

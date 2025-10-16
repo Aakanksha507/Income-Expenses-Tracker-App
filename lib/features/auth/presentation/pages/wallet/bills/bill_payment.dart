@@ -173,7 +173,7 @@ class BillPayment extends StatelessWidget {
             CustomButtonWidget(
               buttonName: 'Pay Now',
               onPressed: () {
-                context.go(Path.billpayment);
+                context.go(Path.billpaymentsuccess);
               },
               textStyle: TextStyle(
                 fontSize: 18.sp,

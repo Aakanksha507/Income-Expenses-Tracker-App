@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
@@ -148,7 +147,6 @@ class _AddExpenseState extends ConsumerState<AddExpense> {
           AppBarHeader(
             dynamicWidget: Stack(
               children: [
-                SvgPicture.asset('assets/images/top_bg.svg'),
                 Positioned(
                   top: 66.h,
                   left: 24.w,
@@ -158,8 +156,10 @@ class _AddExpenseState extends ConsumerState<AddExpense> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       InkWell(
-                        onTap: () => context.go(Path.homepage),
-                        child: const Icon(Icons.arrow_back_ios, size: 20),
+                        onTap: () {
+                          context.go(Path.homepage);
+                        },
+                        child: Icon(Icons.arrow_back_ios, size: 20),
                       ),
                       TextWidget(
                         text: 'Add Expense',
@@ -177,6 +177,7 @@ class _AddExpenseState extends ConsumerState<AddExpense> {
                     ],
                   ),
                 ),
+                // SvgPicture.asset('assets/images/top_bg.svg'),
               ],
             ),
           ),

@@ -10,5 +10,7 @@ class Path {
   static const connect = '/connect';
   static const billdetails = '/billdetails';
   static const billpayment = '/billpayment';
-    static const select = '/select';
+  static const billpaymentsuccess = '/billpaymentsuccess';
+  static const select = '/select';
+  static const transaction = '/transaction';
 }

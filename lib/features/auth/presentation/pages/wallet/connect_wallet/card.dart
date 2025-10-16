@@ -6,6 +6,7 @@ import 'package:incomeexpensestracker/features/auth/presentation/provider/card_f
 import 'package:incomeexpensestracker/features/auth/presentation/provider/hive_data_provider.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/text_form_widget.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/text_widget.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class CardWallet extends ConsumerStatefulWidget {
   const CardWallet({super.key});
@@ -47,6 +48,23 @@ class _CardWalletState extends ConsumerState<CardWallet> {
     ];
 
     return '${days[date.weekday - 1]}, ${date.day} ${months[date.month - 1]} ${date.year}';
+  }
+
+  final cardNumberFormatter = MaskTextInputFormatter(
+    mask: '#### #### #### ####',
+    filter: {'#': RegExp(r'[0-16]')},
+  );
+
+  String getMaskedCardNumber(String cardNumber) {
+    String cleaned = cardNumber.replaceAll(' ', '');
+    if (cleaned.length < 7) return cardNumber;
+
+    String firstFour = cleaned.substring(0, 4);
+    String secondFour = cleaned.substring(4, 8);
+    String thirdFour = cleaned.substring(8, 12);
+    String lastThree = cleaned.substring(cleaned.length - 4);
+
+    return '$firstFour  $secondFour  $thirdFour  $lastThree';
   }
 
   @override
@@ -141,9 +159,8 @@ class _CardWalletState extends ConsumerState<CardWallet> {
                         SizedBox(height: 75.h),
                         TextWidget(
                           text: latestCard != null
-                              ? '**** **** ****  ${latestCard.cardNumber.substring(latestCard.cardNumber.length - 4)}'
+                              ? getMaskedCardNumber(latestCard.cardNumber)
                               : '**** **** **** ****',
-
                           style: TextStyle(
                             letterSpacing: 5,
                             color: theme.textTheme.displayMedium!.color,
@@ -151,6 +168,7 @@ class _CardWalletState extends ConsumerState<CardWallet> {
                             fontSize: 13.69,
                           ),
                         ),
+
                         SizedBox(height: 10.h),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -224,6 +242,7 @@ class _CardWalletState extends ConsumerState<CardWallet> {
                             validator: (value) =>
                                 FormValidation.validCardNumber(value),
                             hintText: 'DEBIT CARD NUMBER',
+                            inputFormatters: cardNumberFormatter,
                             controller: cardNumberController,
                             onChanged: (value) => ref
                                 .read(cardFormProvider.notifier)

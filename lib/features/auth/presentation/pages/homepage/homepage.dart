@@ -130,10 +130,17 @@ class _HomepageState extends ConsumerState<Homepage> {
                         key: Key(expense.key.toString()),
                         direction: DismissDirection.endToStart,
                         background: Container(
-                          color: Colors.red,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: Colors.red,
+                          ),
+
                           alignment: Alignment.centerRight,
                           // padding: EdgeInsets.symmetric(horizontal: 20.h),
-                          child: Icon(Icons.delete, color: Colors.white),
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 14.0),
+                            child: Icon(Icons.delete, color: Colors.white),
+                          ),
                         ),
                         onDismissed: (direction) {
                           expense.delete();
@@ -142,34 +149,41 @@ class _HomepageState extends ConsumerState<Homepage> {
                             SnackBar(content: Text('Expense deleted')),
                           );
                         },
-                        child: ListTile(
-                          leading: expense.categoryImage != null
-                              ? Image.asset(
-                                  expense.categoryImage!,
-                                  width: 50.w,
-                                  height: 50.h,
-                                )
-                              : Icon(Icons.image_not_supported),
-                          title: TextWidget(
-                            text: expense.category,
-                            style: TextStyle(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          subtitle: TextWidget(
-                            text: expense.date,
-                            style: TextStyle(
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.w300,
-                            ),
-                          ),
-                          trailing: Text(
-                            '\$${expense.amount}',
-                            style: TextStyle(
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.w500,
-                              color: color,
+                        child: Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            borderRadius: BorderRadius.circular(10),
+                            onLongPress: () {},
+                            child: ListTile(
+                              leading: expense.categoryImage != null
+                                  ? Image.asset(
+                                      expense.categoryImage!,
+                                      width: 50.w,
+                                      height: 50.h,
+                                    )
+                                  : Icon(Icons.image_not_supported),
+                              title: TextWidget(
+                                text: expense.category,
+                                style: TextStyle(
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              subtitle: TextWidget(
+                                text: expense.date,
+                                style: TextStyle(
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.w300,
+                                ),
+                              ),
+                              trailing: Text(
+                                '\$${expense.amount}',
+                                style: TextStyle(
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: color,
+                                ),
+                              ),
                             ),
                           ),
                         ),

@@ -6,6 +6,7 @@ class AppTheme {
       brightness: Brightness.light,
       scaffoldBackgroundColor: Colors.white,
       primaryColor: Color(0xff2A7C76),
+      
       cardColor: Color(0xff2F7E79),
       textTheme: TextTheme(
         titleSmall: TextStyle(color: Colors.grey),
@@ -24,6 +25,7 @@ class AppTheme {
           backgroundColor: MaterialStateProperty.all(Color(0xffECF9F8)),
         ),
       ),
+
 
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: Color(0xff3F8782),

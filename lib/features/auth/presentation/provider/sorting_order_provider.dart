@@ -45,7 +45,6 @@ class SortedExpensesNotifier extends StateNotifier<List<Expense>> {
 
 final sortedExpensesProvider =
     StateNotifierProvider<SortedExpensesNotifier, List<Expense>>((ref) {
-  final allExpenses = ref.watch(expensesBoxProvider).values.toList();
-  return SortedExpensesNotifier(allExpenses);
-});
-
+      final allExpenses = ref.watch(expensesBoxProvider).values.toList();
+      return SortedExpensesNotifier(allExpenses);
+    });

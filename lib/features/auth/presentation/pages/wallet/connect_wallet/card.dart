@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:incomeexpensestracker/features/auth/presentation/provider/card_form_provider.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/text_form_widget.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/text_widget.dart';
 
@@ -44,6 +45,17 @@ class _CardWalletState extends ConsumerState<CardWallet> {
     ];
 
     return '${days[date.weekday - 1]}, ${date.day} ${months[date.month - 1]} ${date.year}';
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    final form = ref.read(cardFormProvider);
+    cardNameController.text = form.cardName;
+    cardNumberController.text = form.cardNumber;
+    cvcController.text = form.cvc;
+    dateController.text = form.date;
+    zipController.text = form.zip;
   }
 
   @override
@@ -185,9 +197,12 @@ class _CardWalletState extends ConsumerState<CardWallet> {
                   children: [
                     TextFormWidget(
                       hintText: 'CARD NAME',
-
                       controller: cardNameController,
+                      onChanged: (value) => ref
+                          .read(cardFormProvider.notifier)
+                          .updateCardName(value),
                     ),
+
                     SizedBox(height: 10.h),
                     Row(
                       children: [
@@ -224,7 +239,11 @@ class _CardWalletState extends ConsumerState<CardWallet> {
                                 lastDate: DateTime(2100),
                               );
                               if (picked != null) {
-                                dateController.text = _formatDate(picked);
+                                final formatted = _formatDate(picked);
+                                dateController.text = formatted;
+                                ref
+                                    .read(cardFormProvider.notifier)
+                                    .updateDate(formatted);
                               }
                             },
                             child: Container(

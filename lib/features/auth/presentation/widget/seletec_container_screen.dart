@@ -1,38 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive/hive.dart';
+import 'package:incomeexpensestracker/features/auth/presentation/data/model/debitcard.dart';
+import 'package:incomeexpensestracker/features/auth/presentation/provider/card_form_provider.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/button_widget.dart';
 
-class SelectableContainersScreen extends StatefulWidget {
-  //   final String cardName;
-  // final String cardNumber;
-  // final String cvc;
-  // final String expiry;
-  // final String zip;
-
-  const SelectableContainersScreen({
-    super.key,
-    // required this.cardName,
-    // required this.cardNumber,
-    // required this.cvc,
-    // required this.expiry,
-    // required this.zip,
-  });
+class SelectableContainersScreen extends ConsumerStatefulWidget {
+  const SelectableContainersScreen({super.key});
 
   @override
-  State<SelectableContainersScreen> createState() =>
+  ConsumerState<SelectableContainersScreen> createState() =>
       _SelectableContainersScreenState();
 }
 
 class _SelectableContainersScreenState
-    extends State<SelectableContainersScreen> {
+    extends ConsumerState<SelectableContainersScreen> {
   int _selectedIndex = 1;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
     return Scaffold(
       body: Padding(
-        padding: EdgeInsetsGeometry.only(left: 35.w, right: 35.w),
+        padding: EdgeInsets.only(left: 35.w, right: 35.w),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
@@ -58,6 +50,7 @@ class _SelectableContainersScreenState
             ),
             SizedBox(height: 100.h),
 
+            /// Submit button
             CustomButtonWidget(
               buttonName: 'Next',
               textStyle: TextStyle(
@@ -71,6 +64,39 @@ class _SelectableContainersScreenState
                 color: theme.primaryColor,
                 style: BorderStyle.solid,
               ),
+              onPressed: () async {
+                final form = ref.read(cardFormProvider);
+
+                if (form.cardName.isEmpty ||
+                    form.cardNumber.isEmpty ||
+                    form.date.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Please complete all card fields."),
+                    ),
+                  );
+                  return;
+                }
+
+                final box = await Hive.openBox<DebitCard>('debitCardBox');
+
+                final newCard = DebitCard(
+                  userId: form.userId.isNotEmpty ? form.userId : 'defaultUser',
+                  cardName: form.cardName,
+                  cardNumber: form.cardNumber,
+                  cvc: form.cvc,
+                  date: form.date,
+                  zip: form.zip,
+                );
+
+                await box.add(newCard);
+
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Card saved successfully")),
+                );
+
+                ref.read(cardFormProvider.notifier).clear();
+              },
             ),
           ],
         ),
@@ -78,6 +104,7 @@ class _SelectableContainersScreenState
     );
   }
 
+  /// Widget to build each selectable container (Bank Link, Microdeposits, etc.)
   Widget _buildSelectableContainer(
     int index,
     String text,

@@ -17,7 +17,7 @@ class BillDetails extends StatelessWidget {
     return Scaffold(
       body: ScreenLayout(
         dynamicWidget: Padding(
-          padding: const EdgeInsets.only(left: 24.0, right: 24.0, top: 66),
+          padding: EdgeInsets.only(left: 24.0.w, right: 24.0.w, top: 66.h),
           child: Stack(
             children: [
               Column(
@@ -37,7 +37,7 @@ class BillDetails extends StatelessWidget {
                         style: TextStyle(
                           color: theme.textTheme.displayMedium!.color,
                           fontWeight: FontWeight.w600,
-                          fontSize: 18,
+                          fontSize: 18.sp,
                         ),
                       ),
                       Material(
@@ -66,15 +66,15 @@ class BillDetails extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 30.0, top: 25, bottom: 10),
+                padding: EdgeInsets.only(left: 30.0.w, top: 25.h, bottom: 10.h),
                 child: Row(
                   children: [
                     Container(
-                      height: 80,
-                      width: 80,
+                      height: 80.h,
+                      width: 80.w,
                       decoration: BoxDecoration(
                         color: Colors.grey[100],
-                        borderRadius: BorderRadius.circular(50),
+                        borderRadius: BorderRadius.circular(50.r),
                       ),
                     ),
                     Padding(
@@ -85,15 +85,15 @@ class BillDetails extends StatelessWidget {
                           TextWidget(
                             text: 'Youtube Premium',
                             style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                           TextWidget(
                             text: 'feb 28,2002',
                             style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w200,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.normal,
                             ),
                           ),
                         ],
@@ -104,12 +104,13 @@ class BillDetails extends StatelessWidget {
               ),
 
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                padding: EdgeInsets.symmetric(horizontal: 10.0.w),
                 child: SizedBox(
-                  height: 110,
+                  height: 110.h,
                   child: Expanded(
                     child: ListView.builder(
                       padding: EdgeInsets.zero,
+                      shrinkWrap: true,
                       itemCount: 2,
                       itemBuilder: (context, index) {
                         return ListTile(
@@ -123,7 +124,7 @@ class BillDetails extends StatelessWidget {
                           trailing: TextWidget(
                             text: '\$13.90',
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.w700,
                             ),
                           ),
@@ -134,7 +135,7 @@ class BillDetails extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                padding: EdgeInsets.symmetric(horizontal: 30.0.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -146,14 +147,14 @@ class BillDetails extends StatelessWidget {
                         TextWidget(
                           text: 'Total',
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 16.sp,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
                         TextWidget(
                           text: '\$13.90',
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 16.sp,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
@@ -163,7 +164,7 @@ class BillDetails extends StatelessWidget {
                     TextWidget(
                       text: 'Select payment method',
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 16.sp,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -182,16 +183,19 @@ class BillDetails extends StatelessWidget {
 
                       icon: Icons.paypal,
                     ),
-                    SizedBox(height: 30),
-                    CustomButtonWidget(
-                      buttonName: 'Pay Now',
-                      onPressed: () {
-                        context.go(Path.billpayment);
-                      },
-                      textStyle: TextStyle(
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w400,
-                        color: theme.textTheme.displayMedium!.color!,
+                    SizedBox(height: 30.h),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 20.0.h),
+                      child: CustomButtonWidget(
+                        buttonName: 'Pay Now',
+                        onPressed: () {
+                          context.go(Path.billpayment);
+                        },
+                        textStyle: TextStyle(
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w600,
+                          color: theme.textTheme.displayMedium!.color!,
+                        ),
                       ),
                     ),
                   ],

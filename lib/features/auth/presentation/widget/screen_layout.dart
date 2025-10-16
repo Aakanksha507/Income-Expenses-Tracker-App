@@ -20,10 +20,10 @@ class ScreenLayout extends StatelessWidget {
         ),
         SvgPicture.asset('assets/images/top_bg.svg'),
         Padding(
-          padding:  EdgeInsets.only(top: 165.0.h),
+          padding: EdgeInsets.only(top: 165.0.h),
           child: Container(
             width: 414.w,
-            height: 560.h,
+            height: 700.h,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(30.r),

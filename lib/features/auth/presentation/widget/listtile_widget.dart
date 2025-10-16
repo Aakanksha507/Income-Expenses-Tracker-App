@@ -5,7 +5,7 @@ import 'package:incomeexpensestracker/features/auth/presentation/widget/custom_s
 
 class ProfileTile extends StatelessWidget {
   final String img;
-  final String?label;
+  final String? label;
 
   const ProfileTile({required this.img, required this.label});
 
@@ -13,7 +13,10 @@ class ProfileTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: SvgPicture.asset(img),
-      title: Text(label ?? '', style: TextStyle(fontSize: 16.sp)),
+      title: Text(
+        label ?? '',
+        style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500),
+      ),
       onTap: () {
         CustomSnackBar.show(context, 'Coming Soon');
       },

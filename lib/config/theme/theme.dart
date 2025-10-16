@@ -9,6 +9,7 @@ class AppTheme {
       cardColor: Color(0xff2F7E79),
       textTheme: TextTheme(
         titleSmall: TextStyle(color: Colors.grey),
+        displayLarge: TextStyle(color: Colors.grey[900]),
         titleMedium: TextStyle(color: Colors.grey[700]),
         displayMedium: TextStyle(color: Colors.white),
         displaySmall: TextStyle(color: Colors.black),
@@ -27,11 +28,14 @@ class AppTheme {
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: Color(0xff3F8782),
         splashColor: Color(0xff69AEA9),
-        
       ),
       cardTheme: CardThemeData(color: Colors.white),
       iconTheme: IconThemeData(color: Colors.white),
       navigationBarTheme: NavigationBarThemeData(backgroundColor: Colors.white),
+      snackBarTheme: SnackBarThemeData(
+        backgroundColor: Colors.grey[800],
+        actionTextColor: Colors.white,
+      ),
     );
   }
 

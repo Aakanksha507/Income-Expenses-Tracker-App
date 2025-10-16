@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:incomeexpensestracker/core/validation/form_validation.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/provider/card_form_provider.dart';
+import 'package:incomeexpensestracker/features/auth/presentation/provider/hive_data_provider.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/text_form_widget.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/text_widget.dart';
 
@@ -61,6 +63,10 @@ class _CardWalletState extends ConsumerState<CardWallet> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final cardBox = ref.watch(cardBoxProvider);
+    final cards = cardBox.values.toList();
+    final latestCard = cards.isNotEmpty ? cards.last : null;
+
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -134,7 +140,10 @@ class _CardWalletState extends ConsumerState<CardWallet> {
                         ),
                         SizedBox(height: 75.h),
                         TextWidget(
-                          text: '1322  222  2222  43343',
+                          text: latestCard != null
+                              ? '**** **** ****  ${latestCard.cardNumber.substring(latestCard.cardNumber.length - 4)}'
+                              : '**** **** **** ****',
+
                           style: TextStyle(
                             letterSpacing: 5,
                             color: theme.textTheme.displayMedium!.color,
@@ -147,7 +156,9 @@ class _CardWalletState extends ConsumerState<CardWallet> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             TextWidget(
-                              text: 'Invas Moses'.toUpperCase(),
+                              text:
+                                  latestCard?.cardName.toUpperCase() ??
+                                  'NAME SURNAME',
                               style: TextStyle(
                                 overflow: TextOverflow.clip,
                                 color: theme.textTheme.displayMedium!.color,
@@ -156,7 +167,7 @@ class _CardWalletState extends ConsumerState<CardWallet> {
                               ),
                             ),
                             TextWidget(
-                              text: '22/01',
+                              text: latestCard?.date ?? 'MM/YY',
                               style: TextStyle(
                                 color: theme.textTheme.displayMedium!.color,
                                 fontWeight: FontWeight.w500,
@@ -197,6 +208,7 @@ class _CardWalletState extends ConsumerState<CardWallet> {
                   children: [
                     TextFormWidget(
                       hintText: 'CARD NAME',
+                      validator: (value) => FormValidation.validCardName(value),
                       controller: cardNameController,
                       onChanged: (value) => ref
                           .read(cardFormProvider.notifier)
@@ -209,17 +221,27 @@ class _CardWalletState extends ConsumerState<CardWallet> {
                         Expanded(
                           flex: 2,
                           child: TextFormWidget(
+                            validator: (value) =>
+                                FormValidation.validCardNumber(value),
                             hintText: 'DEBIT CARD NUMBER',
                             controller: cardNumberController,
+                            onChanged: (value) => ref
+                                .read(cardFormProvider.notifier)
+                                .updateCardNumber(value),
                             keyboardType: TextInputType.number,
                           ),
                         ),
                         SizedBox(width: 10.w),
                         Expanded(
                           child: TextFormWidget(
+                            validator: (value) =>
+                                FormValidation.validCardCVC(value),
                             hintText: 'CVC',
                             keyboardType: TextInputType.number,
                             controller: cvcController,
+                            onChanged: (value) => ref
+                                .read(cardFormProvider.notifier)
+                                .updateCVC(value),
                           ),
                         ),
                       ],
@@ -295,8 +317,13 @@ class _CardWalletState extends ConsumerState<CardWallet> {
                         Expanded(
                           child: TextFormWidget(
                             hintText: 'ZIP',
+                            validator: (value) =>
+                                FormValidation.validCardZip(value),
                             keyboardType: TextInputType.number,
                             controller: zipController,
+                            onChanged: (value) => ref
+                                .read(cardFormProvider.notifier)
+                                .updateZip(value),
                           ),
                         ),
                       ],

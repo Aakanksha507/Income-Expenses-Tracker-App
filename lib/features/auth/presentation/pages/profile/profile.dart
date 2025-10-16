@@ -126,7 +126,7 @@ class _ProfileState extends ConsumerState<Profile> {
             userName,
             style: TextStyle(
               fontWeight: FontWeight.w600,
-              fontSize: 18.sp,
+              fontSize: 20.sp,
               color: theme.textTheme.displaySmall!.color,
             ),
           ),
@@ -176,7 +176,7 @@ class _ProfileState extends ConsumerState<Profile> {
               textStyle: TextStyle(
                 color: theme.textTheme.displayMedium!.color!,
                 fontWeight: FontWeight.bold,
-                fontSize: 16,
+                fontSize: 18.sp,
               ),
               onPressed: isLoading
                   ? null
@@ -193,8 +193,8 @@ class _ProfileState extends ConsumerState<Profile> {
                     },
               child: isLoading
                   ? SizedBox(
-                      height: 20,
-                      width: 20,
+                      height: 20.h,
+                      width: 20.w,
                       child: CircularProgressIndicator(strokeWidth: 1),
                     )
                   : null,

@@ -13,6 +13,7 @@ class TextFormWidget extends StatefulWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final bool autoFocus;
+  final Color? color;
 
   const TextFormWidget({
     super.key,
@@ -26,6 +27,7 @@ class TextFormWidget extends StatefulWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.autoFocus = false,
+    this.color,
   });
 
   @override
@@ -103,12 +105,15 @@ class _TextFormWidgetState extends State<TextFormWidget> {
           onTap: widget.onTap,
           validator: widget.validator,
           style: TextStyle(
-            color: theme.textTheme.titleSmall?.color,
+            color: theme.textTheme.titleMedium?.color,
             fontWeight: FontWeight.w500,
             fontSize: 14.sp,
           ),
           decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 16.w,
+              vertical: 12.h,
+            ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8.r),
               borderSide: BorderSide(color: Color(0xFFCACACA)),

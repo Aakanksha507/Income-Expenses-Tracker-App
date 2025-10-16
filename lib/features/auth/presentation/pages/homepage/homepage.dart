@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:incomeexpensestracker/config/route/path.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/data/enum.dart';
-import 'package:incomeexpensestracker/features/auth/presentation/pages/alert_dialogue/alert_dialogue.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/provider/hive_data_provider.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/appbarheader.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/creditcard_widget.dart';
@@ -208,16 +209,16 @@ class _HomepageState extends ConsumerState<Homepage> {
         backgroundColor: theme.floatingActionButtonTheme.backgroundColor,
 
         onPressed: () {
-          // context.go(Path.addexpense);
+          context.go(Path.addexpense);
 
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialogueWidget(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          );
+          // showDialog(
+          //   context: context,
+          //   builder: (context) => AlertDialogueWidget(
+          //     onPressed: () {
+          //       Navigator.of(context).pop();
+          //     },
+          //   ),
+          // );
         },
         child: Icon(Icons.add, color: Colors.white),
       ),

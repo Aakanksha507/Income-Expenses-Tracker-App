@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hive/hive.dart';
+import 'package:incomeexpensestracker/config/route/path.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/data/model/debitcard.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/provider/card_form_provider.dart';
 import 'package:incomeexpensestracker/features/auth/presentation/widget/button_widget.dart';
@@ -48,7 +50,7 @@ class _SelectableContainersScreenState
               'Connect your PayPal account',
               Icons.account_balance_wallet_outlined,
             ),
-            SizedBox(height: 100.h),
+            SizedBox(height: 70.h),
 
             /// Submit button
             CustomButtonWidget(
@@ -90,6 +92,7 @@ class _SelectableContainersScreenState
                 );
 
                 await box.add(newCard);
+                context.go(Path.billdetails);
 
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text("Card saved successfully")),
